@@ -1,0 +1,203 @@
+<!-- Main Footer -->
+<footer class="main-footer text-center">
+    <!-- Default to the left -->
+    Copyright &copy; 2020 <strong> SIMS</strong> All rights reserved.
+</footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Form validation 4 -->
+<script src="/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="/plugins/jquery-validation/additional-methods.min.js"></script>
+
+<!-- DataTables -->
+<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+<!-- Select2 -->
+<script src="/plugins/select2/js/select2.full.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/dist/js/adminlte.min.js"></script>
+
+<script>
+    async function showUpdateModal(updateModalBtn, url) {
+        const id = updateModalBtn.dataset.id;
+        try {
+            let { data: editModelData } = await axios.get(`/${url}/${id}`)
+
+            const modalInputs = document.querySelectorAll('.updateInputField')
+            modalInputs.forEach(input => {
+                if (input.nodeName.toLowerCase() == 'select') {
+                    Array.from(input.children).forEach(select => {
+                        if (select.value.toLowerCase() == editModelData[input.name].toLowerCase()) {
+                            select.selected = true;
+                            console.log('Selected')
+                        }
+                    })
+                }
+                input.value = editModelData[input.name]
+            })
+
+            if (url == 'class') {
+                let { data: sections } = await axios.get('/section/get-section-for-class');
+
+                const sectionCheckBoxWrap = document.querySelector('.section-checkbox-edit-wrap');
+                let html = '';
+                sections.forEach(section => {
+                    html += `<div class="form-check d-inline section-checkbox">
+                                <input class="form-check-input" type="checkbox" ${checkBox(section.name)} name="section" id="section" value="${section._id}">
+                                <label class="form-check-label">${section.name}</label>
+                            </div>`
+                })
+                sectionCheckBoxWrap.innerHTML = html;
+                function checkBox(name) {
+                    const sectionsArray = editModelData.section.map(section => section.name);
+                    if (sectionsArray.includes(name)) { return "checked" } else {
+                        return "";
+                    };
+                }
+            }
+
+
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    function showDeleteModal(deleteModalBtn) {
+        const id = deleteModalBtn.dataset.id;
+        document.querySelector(".deleteBtn").dataset.id = id;
+    }
+
+    async function deleteSingleItem(deleteBtn, url) {
+        const id = deleteBtn.dataset.id;
+        try {
+            let response = await axios.delete(`/${url}/${id}`)
+            location.href = response.data.url;
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+</script>
+
+
+<script>
+    $(document).ready(function () {
+
+        // Flash message slide out
+        setTimeout(function () {
+            $('.hide').slideUp()
+        }, 2000)
+
+        // init data table
+        $("#dataTable").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+        });
+
+
+        //Initialize Select2 Elements
+        $('.select2').select2();
+
+        // Form validation
+        $('.form-submit').on('click', function (e) {
+            if ($(".notSelect").val() == 'notSelect') {
+                $(".select2-selection").css('border', '1px solid red');
+                e.preventDefault();
+            }
+        });
+
+        $(".notSelect").on('change', function (e) {
+            $(".select2-selection").css('borderColor', '#ced4da');
+        })
+
+
+        $('.form').validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true,
+                },
+                password: {
+                    required: true,
+                    minlength: 5
+                },
+                terms: {
+                    required: true
+                },
+                name: {
+                    required: true
+                },
+                firstName: {
+                    required: true
+                },
+                lastName: {
+                    required: true
+                },
+                address: {
+                    required: true
+                },
+                gender: {
+                    required: true
+                },
+                phone: {
+                    required: true
+                },
+
+
+            },
+            messages: {
+                email: {
+                    required: "Please enter a email address",
+                    email: "Please enter a valid email address"
+                },
+                password: {
+                    required: "Please provide a password",
+                    minlength: "Your password must be at least 5 characters long"
+                },
+                terms: "Please accept our terms",
+                name: "Please input filed",
+                section: 'Must be checked one section',
+                firstName: 'Please enter first name',
+                lastName: 'Please enter last name',
+                address: 'Please enter address',
+                phone: 'Please enter phone number',
+                gender: 'Please select gender',
+
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+
+
+    });
+</script>
+
+
+
+
+
+
+</body>
+
+</html>

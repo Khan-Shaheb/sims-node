@@ -1,0 +1,140 @@
+{{> contentHeader page="Session"}}
+{{> messages}}
+<div class="row">
+    <div class="col-6">
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title">Add Session</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form role="form" class="form" method="POST" action="/session">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="updateName">Name</label>
+                        <input type="text" class="form-control" id="updateName" name="name"
+                            placeholder="Enter session Name (2020-2021)">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info form-submit">Create</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <div class="card card-info">
+            <div class="card-header ">
+                <h3 class="card-title">All Session</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                {{#if error}}
+                    {{error}}
+                {{else}}
+                    <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6"></div>
+                            <div class="col-sm-12 col-md-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="dataTable" class="table table-bordered table-hover dataTable dtr-inline"
+                                    role="grid" aria-describedby="example2_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting" tabindex="0" aria-controls="example2">ID</th>
+                                            <th class="sorting_desc" tabindex="0" aria-controls="example2">Name</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2">
+                                                Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        {{#each sessions}}
+                                            <tr role="row" class="odd">
+                                                <td class="" tabindex="0">{{incrementOne @index}}</td>
+                                                <td class="sorting_1">{{name}}</td>
+                                                <td>
+                                                    <button data-id="{{_id}}" onclick="showUpdateModal(this, 'session')"
+                                                        data-toggle="modal" data-target="#update"
+                                                        class="btn btn-primary btn-small">Edit</button>
+                                                    <button data-id="{{_id}}" onclick="showDeleteModal(this, 'session')"
+                                                        data-toggle="modal" data-target="#delete"
+                                                        class="btn btn-danger btn-small">Delete</button>
+                                                </td>
+                                            </tr>
+                                        {{/each}}
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                {{/if}}
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+    </div>
+    <!-- /.col -->
+</div>
+
+<div class="modal fade" id="delete" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content bg-danger">
+            <div class="modal-header">
+                <h4 class="modal-title">Delete Session</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <Do>Are you sure? Do you want to delete this Record?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button onclick="deleteSingleItem(this, 'session')" style="width: 100%;" type="button"
+                    class="btn btn-light deleteBtn">Delete</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="update" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content bg-info">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Session</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form role="form" method="POST" class="updateForm" action="/session?_method=PUT">
+                <div class="modal-body">
+                    <!-- form start -->
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control updateNameInp updateInputField" name="name" id="name"
+                            placeholder="Enter session name">
+                    </div>
+                    <input type="hidden" name="_id" class="hiddenId updateInputField">
+
+                </div>
+                <div class="modal-footer justify-content-between">
+
+                    <button style="width: 100%;" type="submit" class="btn btn-light">Update</button>
+
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

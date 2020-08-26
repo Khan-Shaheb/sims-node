@@ -1,0 +1,392 @@
+{{> contentHeader page="Student" subPage="Add"}}
+<div class="row">
+	<form action="/student" method="POST">
+		<div class="col-12">
+			<div class="card card-info">
+				<div class="card-header">
+					<h3 class="card-title">Academic Information</h3>
+				</div>
+
+				<div class="card-body">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label>Select Class<sup>*</sup></label>
+								<select
+									name="class"
+									id="class"
+									class="form-control select2"
+								>
+									{{#if classes}}
+									{{#each classes}}
+									<option value="{{ _id }}">{{
+										name
+									}}</option>
+									{{/each}}
+									{{else }}
+									<option value="null"
+										>Please 1st Add Class</option
+									>
+									{{/if}}
+								</select>
+							</div>
+						</div>
+
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label>Select Section<sup>*</sup></label>
+								<select
+									name="section"
+									id="section"
+									class="form-control select2"
+								>
+									{{#if sections}}
+									{{#each sections}}
+									<option value="{{ _id }}">{{
+										name
+									}}</option>
+									{{/each}}
+									{{else }}
+									<option value="null"
+										>Please 1st Add Section</option
+									>
+									{{/if}}
+								</select>
+							</div>
+						</div>
+
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="session"
+									>Select Session<sup>*</sup></label
+								>
+								<select
+									name="session"
+									id="session"
+									class="form-control"
+								>
+									{{#if sessions}}
+									{{#each sessions}}
+									<option value="{{ _id }}">{{
+										name
+									}}</option>
+									{{/each}}
+									{{else }}
+									<option value=""
+										>Please 1st Add Session</option
+									>
+									{{/if}}
+								</select>
+							</div>
+						</div>
+
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="admissionNo"
+									>Admission No<sup>*</sup></label
+								>
+								<input
+									type="text"
+									class="form-control"
+									placeholder="Enter Admission no"
+									name="admissionNo"
+									id="admissionNO"
+								/>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="regNo">Registration No</label>
+								<input
+									type="text"
+									class="form-control"
+									placeholder="Enter ..."
+									name="regNo"
+									id="regNo"
+								/>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="rollNo">Roll No<sup>*</sup></label>
+								<input
+									type="text"
+									class="form-control"
+									placeholder="Enter ..."
+									name="rollNo"
+									id="rollNo"
+								/>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="dept">Select Group</label>
+								<select
+									name="dept"
+									id="dept"
+									class="form-control"
+									name="dept"
+								>
+									<option value="">Science</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-12">
+			<div class="card card-info">
+				<div class="card-header">
+					<h3 class="card-title">Student Information</h3>
+				</div>
+
+				<div class="card-body">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="sFirstName"
+									>first Name <sup>*</sup></label
+								>
+								<input
+									name="sFirstName"
+									id="sFirstName"
+									class="form-control"
+								/>
+							</div>
+						</div>
+
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="sLastName"
+									>Last Name <sup>*</sup></label
+								>
+								<input
+									name="sLastName"
+									id="sLastName"
+									class="form-control"
+								/>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="gender"
+									>Select Gender <sup>*</sup></label
+								>
+								<select
+									name="gender"
+									id="gender"
+									class="form-control"
+									name="gender"
+								>
+									<option value="">Select A Gender</option>
+									<option value="male">Male</option>
+									<option value="female">Female</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="dob"
+									>Date of Birth <sup>*</sup></label
+								>
+								<input
+									type="date"
+									class="form-control"
+									name="dob"
+									id="dob"
+								/>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="religion"
+									>Religion <sup>*</sup></label
+								>
+								<input
+									type="text"
+									class="form-control"
+									placeholder="Enter Religion"
+									name="religion"
+									id="religion"
+								/>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="sMobile"
+									>Mobile No <sup>*</sup></label
+								>
+								<input
+									type="text"
+									class="form-control"
+									placeholder="Enter Mobile No"
+									name="sMobile"
+									id="sMobile"
+								/>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="sEmail">Email</label>
+								<input
+									type="text"
+									class="form-control"
+									placeholder="Enter Email"
+									name="sEmail"
+									id="sEmail"
+								/>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="blood">Blood Group</label>
+								<select
+									name="blood"
+									id="blood"
+									class="form-control select2 noSelect"
+								>
+									<option value=""
+										>Select A Blood Group</option
+									>
+									<option value="A-">A-</option>
+									<option value="A+">A+</option>
+									<option value="B+">B+</option>
+									<option value="B-">B-</option>
+									<option value="AB-">AB-</option>
+									<option value="AB+">AB+</option>
+									<option value="O">O-</option>
+									<option value="O+">O+</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="stuPhoto">Student Photo</label>
+								<div class="custom-file">
+									<input
+										type="file"
+										class="custom-file-input"
+										id="stuPhoto"
+									/>
+									<label
+										class="custom-file-label"
+										for="stuPhoto"
+										>Choose file</label
+									>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="sAddress">Address</label>
+								<textarea
+									class="form-control"
+									rows="1"
+									placeholder="Enter Address"
+									name="sAddress"
+									id="sAddress"
+								></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-12">
+			<div class="card card-info">
+				<div class="card-header">
+					<h3 class="card-title">Parent/Guardian Detail</h3>
+				</div>
+
+				<div class="card-body">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="pFirstName"
+									>first Name <sup>*</sup></label
+								>
+								<input
+									name="pFirstName"
+									id="pFirstName"
+									class="form-control"
+									placeholder="Enter Parent First Name"
+								/>
+							</div>
+						</div>
+
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="pLastName"
+									>Last Name <sup>*</sup></label
+								>
+								<input
+									name="pLastName"
+									id="pLastName"
+									class="form-control"
+									placeholder="Enter Parent Last Name"
+								/>
+							</div>
+						</div>
+
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="pMobile"
+									>Mobile No <sup>*</sup></label
+								>
+								<input
+									type="text"
+									class="form-control"
+									placeholder="Enter Parent Mobile"
+									name="pMobile"
+									id="pMobile"
+								/>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="occupation">Occupation</label>
+								<input
+									type="text"
+									class="form-control"
+									placeholder="Enter Parent occupation"
+									name="occupation"
+									id="occupation"
+								/>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="pEmail">Email</label>
+								<input
+									type="text"
+									class="form-control"
+									placeholder="Enter Parent Email"
+									name="pEmail"
+									id="pEmail"
+								/>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="pAddress">Address</label>
+								<textarea
+									class="form-control"
+									rows="1"
+									placeholder="Enter Parent Address"
+									name="pAddress"
+									id="pAddress"
+								></textarea>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<button type="submit" class="btn btn-info">
+								Register
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

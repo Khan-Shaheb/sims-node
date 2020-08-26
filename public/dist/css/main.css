@@ -1,0 +1,25 @@
+img#photo2 {
+	width: 100%;
+}
+
+.dataTables_paginate .pagination {
+	justify-content: flex-end;
+}
+.error {
+	color: red;
+	font-size: 12px;
+}
+.content-header h1 {
+	font-size: 1.8rem;
+	margin: 0;
+}
+.section-checkbox {
+	margin-left: 10px;
+}
+.invalid-feedback {
+	display: block;
+}
+.form .form-group:last-child,
+.updateForm .form-group:last-child {
+	margin-bottom: 0 !important;
+}
