@@ -23,6 +23,7 @@ module.exports = {
 					sections,
 				});
 			}
+
 			res.render('admin/class', { sections, classes });
 		} catch (err) {
 			console.log(err);

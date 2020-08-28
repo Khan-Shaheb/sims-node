@@ -2,23 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const teacherSchema = new Schema({
-	firstName: {
-		type: String,
-		required: true,
-	},
-	lastName: {
-		type: String,
-		required: true,
-	},
-	gender: {
-		type: String,
-		required: true,
-	},
-	address: {
-		type: String,
-		required: true,
-	},
-	phone: {
+	fullName: {
 		type: String,
 		required: true,
 	},
@@ -26,9 +10,35 @@ const teacherSchema = new Schema({
 		type: String,
 		required: true,
 	},
-	image: {
+	password: {
 		type: String,
 		required: true,
+	},
+	designation: {
+		type: String,
+	},
+	dept: {
+		type: Schema.Types.ObjectId,
+		ref: 'department',
+	},
+	gender: {
+		type: String,
+	},
+	dob: {
+		type: String,
+	},
+	joinDate: {
+		type: String,
+	},
+	religion: {
+		type: String,
+	},
+	address: {
+		type: String,
+		required: true,
+	},
+	photo: {
+		type: String,
 	},
 	createdAt: {
 		type: Date,

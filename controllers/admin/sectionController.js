@@ -51,9 +51,11 @@ module.exports = {
 			const section = await Section.findByIdAndDelete(id);
 			if (section == null) {
 				req.flash('errorMessage', 'No section found for Delete!');
-				return res.json({ url: '/section', deletedSection: null });
+				return res
+					.status(404)
+					.json({ url: '/section', deletedSection: null });
 			}
-			req.flash('errorMessage', `Successfully deleted Section`);
+			req.flash('successMessage', 'Successfully deleted Section');
 			res.status(200).json({ url: '/section', deletedSection: section });
 		} catch (err) {
 			console.log(err);
@@ -64,7 +66,7 @@ module.exports = {
 		let section = new Section({
 			name: req.body.name.toUpperCase(),
 		});
-		console.log(req.body);
+
 		try {
 			section = await section.save();
 			req.flash('successMessage', `Successfully added Section`);

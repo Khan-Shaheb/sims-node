@@ -33,6 +33,10 @@ app.use(
 		resave: false,
 	})
 );
+app.use(function (req, res, next) {
+	res.locals.session = req.session;
+	next();
+});
 // flash init
 app.use(flash());
 
