@@ -1,7 +1,7 @@
 {{> contentHeader page="Student" subPage="Add"}}
 <div class="row">
-	<form action="/student" method="POST">
-		<div class="col-12">
+	<form action="/student" method="POST" enctype="multipart/form-data" class="my-form form-submit">
+		<div class="col-12"> 
 			<div class="card card-info">
 				<div class="card-header">
 					<h3 class="card-title">Academic Information</h3>
@@ -17,14 +17,15 @@
 									id="class"
 									class="form-control select2"
 								>
-									{{#if classes}}
+                                    {{#if classes}}
+                                    <option value="">Select Class</option>
 									{{#each classes}}
 									<option value="{{ _id }}">{{
 										name
 									}}</option>
 									{{/each}}
 									{{else }}
-									<option value="null"
+									<option value=""
 										>Please 1st Add Class</option
 									>
 									{{/if}}
@@ -40,14 +41,15 @@
 									id="section"
 									class="form-control select2"
 								>
-									{{#if sections}}
+                                    {{#if sections}}
+                                    <option value="">Select Section</option>
 									{{#each sections}}
 									<option value="{{ _id }}">{{
 										name
 									}}</option>
 									{{/each}}
 									{{else }}
-									<option value="null"
+									<option value=""
 										>Please 1st Add Section</option
 									>
 									{{/if}}
@@ -63,9 +65,10 @@
 								<select
 									name="session"
 									id="session"
-									class="form-control"
+									class="form-control select2"
 								>
-									{{#if sessions}}
+                                    {{#if sessions}}
+                                    <option value="">Select Session</option>
 									{{#each sessions}}
 									<option value="{{ _id }}">{{
 										name
@@ -120,14 +123,16 @@
 						</div>
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label for="dept">Select Group</label>
+								<label for="group">Select Group</label>
 								<select
-									name="dept"
-									id="dept"
-									class="form-control"
-									name="dept"
+									name="group"
+									id="group"
+									class="form-control select2"
+									name="group"
 								>
-									<option value="">Science</option>
+									<option value="">Select Group</option>
+									<option value="science">Science</option>
+									<option value="arts">Arts</option>
 								</select>
 							</div>
 						</div>
@@ -145,12 +150,12 @@
 					<div class="row">
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label for="sFirstName"
-									>first Name <sup>*</sup></label
+								<label for="SFirstName"
+									>First Name <sup>*</sup></label
 								>
 								<input
-									name="sFirstName"
-									id="sFirstName"
+									name="SFirstName"
+									id="SFirstName"
 									class="form-control"
 								/>
 							</div>
@@ -158,12 +163,12 @@
 
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label for="sLastName"
+								<label for="SLastName"
 									>Last Name <sup>*</sup></label
 								>
 								<input
-									name="sLastName"
-									id="sLastName"
+									name="SLastName"
+									id="SLastName"
 									class="form-control"
 								/>
 							</div>
@@ -176,10 +181,10 @@
 								<select
 									name="gender"
 									id="gender"
-									class="form-control"
+									class="form-control select2"
 									name="gender"
 								>
-									<option value="">Select A Gender</option>
+									<option value="" >Select A Gender</option>
 									<option value="male">Male</option>
 									<option value="female">Female</option>
 								</select>
@@ -191,17 +196,18 @@
 									>Date of Birth <sup>*</sup></label
 								>
 								<input
-									type="date"
-									class="form-control"
+									type="text"
+									class="form-control inputDate"
 									name="dob"
-									id="dob"
+                                    id="dob"
+                                    value=""
 								/>
 							</div>
 						</div>
 						<div class="col-sm-3">
 							<div class="form-group">
 								<label for="religion"
-									>Religion <sup>*</sup></label
+									>Religion</label
 								>
 								<input
 									type="text"
@@ -214,27 +220,27 @@
 						</div>
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label for="sMobile"
-									>Mobile No <sup>*</sup></label
+								<label for="SMobile"
+									>Mobile No</label
 								>
 								<input
 									type="text"
 									class="form-control"
 									placeholder="Enter Mobile No"
-									name="sMobile"
-									id="sMobile"
+									name="SMobile"
+									id="SMobile"
 								/>
 							</div>
 						</div>
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label for="sEmail">Email</label>
+								<label for="SEmail">Email</label>
 								<input
 									type="text"
 									class="form-control"
 									placeholder="Enter Email"
-									name="sEmail"
-									id="sEmail"
+									name="SEmail"
+									id="SEmail"
 								/>
 							</div>
 						</div>
@@ -244,7 +250,7 @@
 								<select
 									name="blood"
 									id="blood"
-									class="form-control select2 noSelect"
+									class="form-control select2"
 								>
 									<option value=""
 										>Select A Blood Group</option
@@ -262,16 +268,17 @@
 						</div>
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label for="stuPhoto">Student Photo</label>
+								<label for="photo">Student Photo</label>
 								<div class="custom-file">
 									<input
 										type="file"
 										class="custom-file-input"
-										id="stuPhoto"
+                                        id="photo"
+                                        name="photo"
 									/>
 									<label
 										class="custom-file-label"
-										for="stuPhoto"
+										for="photo"
 										>Choose file</label
 									>
 								</div>
@@ -279,13 +286,13 @@
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="sAddress">Address</label>
+								<label for="SAddress">Address</label>
 								<textarea
 									class="form-control"
 									rows="1"
 									placeholder="Enter Address"
-									name="sAddress"
-									id="sAddress"
+									name="SAddress"
+									id="SAddress"
 								></textarea>
 							</div>
 						</div>
@@ -296,19 +303,19 @@
 		<div class="col-12">
 			<div class="card card-info">
 				<div class="card-header">
-					<h3 class="card-title">Parent/Guardian Detail</h3>
+					<h3 class="card-title">Parent/Guardian Details</h3>
 				</div>
 
 				<div class="card-body">
 					<div class="row">
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label for="pFirstName"
-									>first Name <sup>*</sup></label
+								<label for="PFirstName"
+									>First Name <sup>*</sup></label
 								>
 								<input
-									name="pFirstName"
-									id="pFirstName"
+									name="PFirstName"
+									id="PFirstName"
 									class="form-control"
 									placeholder="Enter Parent First Name"
 								/>
@@ -317,12 +324,12 @@
 
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label for="pLastName"
+								<label for="PLastName"
 									>Last Name <sup>*</sup></label
 								>
 								<input
-									name="pLastName"
-									id="pLastName"
+									name="PLastName"
+									id="PLastName"
 									class="form-control"
 									placeholder="Enter Parent Last Name"
 								/>
@@ -331,15 +338,15 @@
 
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label for="pMobile"
+								<label for="PMobile"
 									>Mobile No <sup>*</sup></label
 								>
 								<input
 									type="text"
 									class="form-control"
 									placeholder="Enter Parent Mobile"
-									name="pMobile"
-									id="pMobile"
+									name="PMobile"
+									id="PMobile"
 								/>
 							</div>
 						</div>
@@ -357,25 +364,25 @@
 						</div>
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label for="pEmail">Email</label>
+								<label for="PEmail">Email</label>
 								<input
 									type="text"
 									class="form-control"
 									placeholder="Enter Parent Email"
-									name="pEmail"
-									id="pEmail"
+									name="PEmail"
+									id="PEmail"
 								/>
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="pAddress">Address</label>
+								<label for="PAddress">Address</label>
 								<textarea
 									class="form-control"
 									rows="1"
 									placeholder="Enter Parent Address"
-									name="pAddress"
-									id="pAddress"
+									name="PAddress"
+									id="PAddress"
 								></textarea>
 							</div>
 						</div>

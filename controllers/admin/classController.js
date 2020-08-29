@@ -2,7 +2,7 @@ const Class = require('../../models/admin/classModel');
 const Section = require('../../models/admin/sectionModel');
 
 module.exports = {
-	section_index: async (req, res) => {
+	class_index: async (req, res) => {
 		try {
 			let sections = await Section.find().lean().sort({ name: 'asc' });
 			let classes = await Class.find()
@@ -30,7 +30,7 @@ module.exports = {
 			res.status(500).render('error/500');
 		}
 	},
-	section_details: async (req, res) => {
+	class_details: async (req, res) => {
 		const id = req.params.id;
 		try {
 			const newClass = await Class.findById(id)
@@ -46,7 +46,7 @@ module.exports = {
 			res.render('error/500');
 		}
 	},
-	section_update: async (req, res) => {
+	class_update: async (req, res) => {
 		const { _id, name, section } = req.body;
 		try {
 			const updatedClass = await Class.findById(_id);
@@ -69,7 +69,7 @@ module.exports = {
 			res.status(500).render('error/500');
 		}
 	},
-	section_delete: async (req, res) => {
+	class_delete: async (req, res) => {
 		const id = req.params.id;
 		try {
 			const deletedClass = await Class.findByIdAndDelete(id);
@@ -84,7 +84,7 @@ module.exports = {
 			res.status(500).render('error/500');
 		}
 	},
-	section_create: async (req, res) => {
+	class_create: async (req, res) => {
 		let newClass = new Class(req.body);
 
 		try {

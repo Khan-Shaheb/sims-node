@@ -1,5 +1,7 @@
 const { body, validationResult, matchedData } = require('express-validator');
-const teacherValidationRules = () => {
+let url = null;
+const teacherValidationRules = (redirectOrNot = false ) => {
+    url = redirectOrNot;
 	return [
 		body('fullName')
 			.trim()
@@ -32,12 +34,21 @@ const teacherValidationRules = () => {
 			.notEmpty()
 			.withMessage('Address is Required!')
 			.escape(),
+		body('designation').trim().escape(),
+		body('dob'),
+		body('joinDate'),
+		body('religion').trim().escape(),
+		body('gender'),
+		body('dept'),
+		body('photo'),
 	];
 };
 
 const teacherValidate = (req, res, next) => {
 	const errors = validationResult(req);
 	const matchedValue = matchedData(req);
+
+	// console.dir(matchedValue);
 
 	if (errors.isEmpty()) {
 		req.session.success = true;
@@ -47,8 +58,10 @@ const teacherValidate = (req, res, next) => {
 
 	req.session.errors = errors.mapped();
 	req.session.matchedValue = matchedValue;
-	req.session.success = false;
-	res.redirect('/teacher/create');
+    req.session.success = false;
+    
+    if(!url) res.redirect('/teacher/create');
+    else res.redirect('/teacher');
 	return;
 };
 

@@ -16,10 +16,29 @@ img#photo2 {
 .section-checkbox {
 	margin-left: 10px;
 }
-.invalid-feedback {
+.invalid-feedback,
+.select2-container {
 	display: block;
 }
 .form .form-group:last-child,
 .updateForm .form-group:last-child {
 	margin-bottom: 0 !important;
+}
+.teacher-modal-dialog {
+	max-width: 800px;
+}
+.my-circle-img {
+    min-width: 150px;
+    min-height: 150px;
+    background-color: #ddd;
+}
+
+.table td {
+    vertical-align: middle;
+}
+sup {
+    color: red
+}
+.is-invalid{
+    border: 1px solid red
 }

@@ -4,6 +4,7 @@ module.exports = {
 	department_index: async (req, res) => {
 		try {
 			const departments = await Department.find().lean();
+
 			if (departments.length == 0) {
 				return res.render('admin/department', {
 					error: 'No department added! Please add subject',
@@ -76,6 +77,21 @@ module.exports = {
 			department = await department.save();
 			req.flash('successMessage', `Successfully added department`);
 			res.redirect('/department');
+		} catch (err) {
+			console.log(err);
+			res.status(500).render('error/500');
+		}
+	},
+	department_index_list: async (req, res) => {
+		try {
+			const departments = await Department.find()
+				.lean()
+				.sort({ name: 'asc' });
+
+			if (departments.length == 0) {
+				return res.status(404).json(departments);
+			}
+			res.status(200).json(departments);
 		} catch (err) {
 			console.log(err);
 			res.status(500).render('error/500');

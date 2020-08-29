@@ -10,7 +10,7 @@
 			</div>
 			<!-- /.card-header -->
 			<!-- form start -->
-			<form class="form-horizontal" method="POST">
+			<form class="my-form form-horizontal" method="POST" action="/teacher/create" enctype="multipart/form-data">
 				<div class="card-body">
 					<div class="row">
 						<div class="col-sm-6">
@@ -110,12 +110,10 @@
 									class="form-control select2"
 									name="dept"
 									id="dept"
-								>
+                                >
 									{{#each dept}}
-									<option value="{{ _id }}">
-										{{ name }}
-									</option>
-									{{/each}}
+                                        <option value="{{_id}}" {{selected _id session.matchedValue.dept}}>{{name}}</option>
+                                    {{/each}}
 								</select>
 								{{#if session.errors.dept}}
 								<p class="error">
@@ -157,9 +155,25 @@
 									name="gender"
 									id="gender"
 								>
-									<option value="male">Male</option>
-									<option value="female">Female</option>
-									<option value="other">Other</option>
+									<option
+										value="male"
+										{{selected 'male' session.matchedValue.gender}}
+									>
+										Male
+									</option>
+									<option
+										value="female"
+										{{selected 'female' session.matchedValue.gender}}
+									>
+										Female
+									</option>
+									<option
+										value="other"
+										{{selected 'other' session.matchedValue.gender}}
+									>
+										Other
+									</option>
+									
 								</select>
 								{{#if session.errors.gender}}
 								<p class="error">
@@ -174,8 +188,8 @@
 									>Date of Birth</label
 								>
 								<input
-									type="date"
-									class="form-control"
+									type="text"
+									class="form-control inputDate"
 									id="dob"
 									name="dob"
 									value="{{ session.matchedValue.dob }}"
@@ -193,8 +207,8 @@
 									>Joining Date</label
 								>
 								<input
-									type="date"
-									class="form-control"
+									type="text"
+									class="form-control inputDate"
 									id="joinDate"
 									name="joinDate"
 									value="{{ session.matchedValue.joinDate }}"

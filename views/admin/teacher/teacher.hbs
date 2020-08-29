@@ -58,18 +58,18 @@
 									<tr role="row" class="odd">
 										<td class="" tabindex="0">1</td>
 										<td class="sorting_1 text-center">
-											<img class="img-circle"
-												src="https://via.placeholder.com/150"
+											<img class="img-circle my-circle-img"
+												src="{{photo}}"
 												alt=""
 											/>
 										</td>
-										<td class="sorting_1">
+										<td class="sorting_1 text-center">
 											{{ fullName }}
 										</td>
-										<td class="sorting_1">
+										<td class="sorting_1 text-center">
 											{{ email }}
 										</td>
-										<td>
+										<td class="text-center">
                                             <button
                                             data-id="{{_id}}" onclick="showUpdateModal(this, 'teacher')"
 												data-toggle="modal"
@@ -192,7 +192,7 @@
     <!-- /.modal-dialog -->
 </div>
 <div class="modal fade" id="update" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
+    <div class="modal-dialog teacher-modal-dialog">
         <div class="modal-content bg-info">
             <div class="modal-header">
                 <h4 class="modal-title">Edit Teacher</h4>
@@ -200,14 +200,153 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form role="form" method="POST" class="updateForm" action="/teacher?_method=PUT">
+            <form role="form" method="POST" class="updateForm my-form form-horizontal" action="/teacher?_method=PUT" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <!-- form start -->
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" class="form-control updateNameInp updateInputField" name="fullName" id="fullName"
-                            placeholder="Enter teacher name">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="gender" class="col-form-label">Full Name <sup>*</sup>
+                                </label>
+                    
+                                <input type="text" class="form-control updateInputField" id="fullName" name="fullName" placeholder="Enter Full Name"
+                                    />
+                    
+                                {{#if session.errors.fullName}}
+                                    <p class="error">
+                                        {{ session.errors.fullName.msg }}
+                                    </p>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="email" class="col-form-label">Email<sup>*</sup></label>
+                    
+                                <input type="text" class="form-control updateInputField" id="email" name="email" placeholder="Enter Your Email"
+                                   />
+                                {{#if session.errors.email}}
+                                    <p class="error">
+                                        {{ session.errors.email.msg }}
+                                    </p>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="password" class="col-form-label">Password<sup>*</sup></label>
+                    
+                                <input type="text" class="form-control updateInputField" id="password" name="password" placeholder="Enter Your Password"
+                                  />
+                                {{#if session.errors.password}}
+                                    <p class="error">
+                                        {{ session.errors.password.msg }}
+                                    </p>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="designation" class="col-form-label">Designation<sup>*</sup></label>
+                    
+                                <input type="text" class="form-control updateInputField" id="designation" name="designation"
+                                    placeholder="Enter Your Designation" />
+                               
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="dept" class="col-form-label">Select dept</label>
+                    
+                                <select class="form-control updateInputField select2 dept-edit-wrap" name="dept" id="dept">
+                                  
+                                </select>
+                              
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="phone" class="col-form-label">Phone Number<sup>*</sup></label>
+                    
+                                <input type="text" class="form-control updateInputField" id="phone" name="phone" placeholder="Enter Phone Number"
+                                   />
+                                {{#if session.errors.phone}}
+                                    <p class="error">
+                                        {{ session.errors.phone.msg }}
+                                    </p>
+                                {{/if}}
+                            </div>
+                        </div>
+                    
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="gender" class="col-form-label">Gender</label>
+                    
+                                <select class="form-control updateInputField select2" name="gender" id="gender">
+                                    
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select>
+                               
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="dob" class="col-form-label">Date of Birth</label>
+                                <input type="text" class="form-control inputDate updateInputField" id="dob" name="dob" />
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="joinDate" class="col-form-label">Joining Date</label>
+                                <input type="text" class="form-control inputDate updateInputField" id="joinDate" name="joinDate"
+                                     />
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="religion" class="col-form-label">Religion</label>
+                                <input type="text" class="form-control updateInputField" id="religion" name="religion" placeholder="Enter Your Religion"
+                                     />
+                               
+                            </div>
+                        </div>
+                    
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="address" class="col-form-label">Address<sup>*</sup></label>
+                    
+                                <input type="text" class="form-control updateInputField" id="address" name="address" placeholder="Enter Address"
+                                     />
+                                {{#if session.errors.address}}
+                                    <p class="error">
+                                        {{ session.errors.address.msg }}
+                                    </p>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="photo">Photo</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input " id="photo" name="photo" />
+                                        <label class="custom-file-label photo-custom-file" for="photo">
+                                            Choose Photo
+                                        </label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="">Upload</span>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
                     </div>
+                    
                     <input type="hidden" name="_id" class="hiddenId updateInputField">
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -230,7 +369,7 @@
             </div>
             <div class="modal-body">
                 <div class="img-wrap text-center mb-2">
-                    <img class="img-circle" src="https://via.placeholder.com/150" alt="">
+                    <img class="img-circle teacher-details-img" src="https://via.placeholder.com/150" alt="">
                 </div>
                 <div class="details-info">
                     <h4 class="mb-3">Teacher Information</h4>

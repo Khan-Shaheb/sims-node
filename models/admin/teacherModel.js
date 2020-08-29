@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
 const teacherSchema = new Schema({
 	fullName: {
 		type: String,
@@ -20,6 +21,9 @@ const teacherSchema = new Schema({
 	dept: {
 		type: Schema.Types.ObjectId,
 		ref: 'department',
+	},
+	phone: {
+		type: String,
 	},
 	gender: {
 		type: String,
@@ -45,5 +49,7 @@ const teacherSchema = new Schema({
 		default: Date.now(),
 	},
 });
+
+
 
 module.exports = mongoose.model('teacher', teacherSchema);

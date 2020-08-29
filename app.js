@@ -5,7 +5,7 @@ const handlebars = require('express-handlebars');
 const flash = require('connect-flash');
 const session = require('express-session');
 const { globalVariable } = require('./config/config');
-const { incrementOne } = require('./helpers/hbs');
+const { incrementOne, selected, selected2 } = require('./helpers/hbs');
 const methodOverride = require('method-override');
 
 // init express app
@@ -21,6 +21,7 @@ connectDB();
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
 
 // config method override
 app.use(methodOverride('_method'));
@@ -50,7 +51,7 @@ app.engine(
 	handlebars({
 		extname: 'hbs',
 		defaultLayout: 'main',
-		helpers: { incrementOne },
+		helpers: { incrementOne, selected, selected2 },
 	})
 );
 

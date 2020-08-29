@@ -2,11 +2,44 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const studentSchema = new Schema({
-	firstName: {
+	class: {
+		type: Schema.Types.ObjectId,
+		ref: 'class',
+		required: true,
+	},
+	section: {
+		type: Schema.Types.ObjectId,
+		ref: 'section',
+		required: true,
+	},
+	session: {
+		type: Schema.Types.ObjectId,
+		ref: 'session',
+		required: true,
+	},
+
+	admissionNo: {
+		type: Number,
+		required: true,
+	},
+	regNo: {
+		type: Number,
+		required: true,
+	},
+	rollNo: {
+		type: Number,
+		required: true,
+	},
+	group: {
+		type: Schema.Types.ObjectId,
+		ref: 'department',
+		required: true,
+	},
+	SFirstName: {
 		type: String,
 		required: true,
 	},
-	lastName: {
+	SLastName: {
 		type: String,
 		required: true,
 	},
@@ -14,21 +47,45 @@ const studentSchema = new Schema({
 		type: String,
 		required: true,
 	},
-	address: {
+	dob: {
 		type: String,
 		required: true,
 	},
-	phone: {
+	SAddress: {
+		type: String,
+	},
+	SMobile: {
+		type: String,
+	},
+	SEmail: {
+		type: String,
+	},
+	blood: {
+		type: String,
+	},
+	photo: {
+		type: String,
+	},
+	PFirstName: {
 		type: String,
 		required: true,
 	},
-	email: {
+	PLastName: {
 		type: String,
 		required: true,
 	},
-	image: {
-		type: String,
+	PMobile: {
+		type: Number,
 		required: true,
+	},
+	occupation: {
+		type: String,
+	},
+	PEmail: {
+		type: String,
+	},
+	PAddress: {
+		type: String,
 	},
 	createdAt: {
 		type: Date,
