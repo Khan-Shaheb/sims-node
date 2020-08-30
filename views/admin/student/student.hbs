@@ -1,7 +1,7 @@
-{{> contentHeader page="Student" subPage="All Student"}}
+{{> contentHeader page="STUDENT" subPage="All Student"}}
 {{> messages}}
 <div class="row">
-    <div class="col-8">
+    <div class="col-12">
         <div class="card card-info">
             <div class="card-header">
                 <h3 class="card-title">All Student</h3>
@@ -23,10 +23,16 @@
                                             Full Name
                                         </th>
                                         <th class="sorting_desc" tabindex="0" aria-controls="example2">
-                                            Email
+                                            Class
                                         </th>
                                         <th class="sorting" tabindex="0" aria-controls="example2">
-                                            Action
+                                            Section
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2">
+                                            Registration No
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2">
+                                            Roll No
                                         </th>
                                     </tr>
                                 </thead>
@@ -38,10 +44,19 @@
                                                 <img class="img-circle my-circle-img" src="{{photo}}" alt="" />
                                             </td>
                                             <td class="sorting_1 text-center">
-                                                {{ fullName }}
+                                                {{ SFirstName }} {{SLastName}}
                                             </td>
                                             <td class="sorting_1 text-center">
-                                                {{ email }}
+                                                {{ class }}
+                                            </td>
+                                            <td class="sorting_1 text-center">
+                                                {{ section }}
+                                            </td>
+                                            <td class="sorting_1 text-center">
+                                                {{ regNo }}
+                                            </td>
+                                            <td class="sorting_1 text-center">
+                                                {{ rollNo }}
                                             </td>
                                             <td class="text-center">
                                                 <button data-id="{{_id}}" onclick="showUpdateModal(this, 'student')"

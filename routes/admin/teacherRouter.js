@@ -40,7 +40,7 @@ router.get('/:id', teacher_details);
 router.put(
 	'/',
 	upload.single('photo'),
-	teacher.teacherValidationRules(true),
+	teacher.teacherValidationRules(),
 	teacher.teacherValidate,
 	teacher_update
 );

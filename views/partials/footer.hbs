@@ -208,10 +208,7 @@
                     required: true,
                     email: true,
                 },
-                SEmail: {
-                    required: true,
-                    email: true,
-                },
+                
                 password: {
                     required: true,
                     minlength: 4
@@ -228,13 +225,20 @@
                 SLastName: {
                     required: true
                 },
+                PFirstName: {
+                    required: true
+                },
+                PLastName: {
+                    required: true
+                },
                 address: {
                     required: true
                 },
                 phone: {
                     required: true
                 },
-                SMobile: {
+              
+                PMobile: {
                     required: true
                 },
                 class: {
@@ -249,15 +253,13 @@
                 rollNo: {
                     required: true
                 },
-                admissionNo: {
+                regNo: {
                     required: true
                 },
                 dob: {
                     required: true
                 },
-                gender: {
-                    required: true
-                }
+               
 
             },
             messages: {
@@ -265,10 +267,7 @@
                     required: "Please enter a email address",
                     email: "Please enter a valid email address"
                 },
-                SEmail: {
-                    required: "Please enter a email address",
-                    email: "Please enter a valid email address"
-                },
+              
                 password: {
                     required: "Please provide a password",
                     minlength: "Your password must be at least 5 characters long"
@@ -278,16 +277,18 @@
                 fullName: "Please enter your full name",
                 firstName: 'Please enter first name',
                 lastName: 'Please enter last name',
+                PFirstName: 'Please enter first name',
+                PLastName: 'Please enter last name',
                 address: 'Please enter address',
                 phone: 'Please enter phone number',
-                SMobile: 'Please enter mobile number',
+                PMobile: 'Please enter mobile number',
                 class: 'Please Select Class',
                 section: 'Please Select Section',
                 session: 'Please Select Session',
                 rollNo: 'Please Select Roll Number',
-                admissionNo: 'Please Select Admission No',
+                regNo: 'Please Enter Registration No',
                 dob: 'Please Select Date of Birth',
-                gender: 'Please Select Gender',
+                
 
             },
             errorElement: 'span',

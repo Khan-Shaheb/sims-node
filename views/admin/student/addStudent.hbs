@@ -1,7 +1,123 @@
 {{> contentHeader page="Student" subPage="Add"}}
 <div class="row">
-	<form action="/student" method="POST" enctype="multipart/form-data" class="my-form form-submit">
-		<div class="col-12"> 
+	<form action="/student/create" method="POST" enctype="multipart/form-data" class="my-form form-submit">
+        <div class="col-12">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">Student Information</h3>
+                </div>
+        
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="SFirstName">First Name <sup>*</sup></label>
+                                <input name="SFirstName" id="SFirstName" class="form-control" value="{{ session.matchedValue.SFirstName }}"/>
+                                {{#if session.errors.SFirstName}}
+                                    <p class="error">
+                                        {{ session.errors.SFirstName.msg }}
+                                    </p>
+                                {{/if}}
+                            </div>
+                        </div>
+        
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="SLastName">Last Name <sup>*</sup></label>
+                                <input name="SLastName" id="SLastName" class="form-control" value="{{ session.matchedValue.SLastName }}"/>
+                                {{#if session.errors.SLastName}}
+                                    <p class="error">
+                                        {{ session.errors.SLastName.msg }}
+                                    </p>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="gender">Select Gender</label>
+                                <select name="gender" id="gender" class="form-control" name="gender">
+                                    <option value="">Select Gender</option>
+                                    <option value="male" {{selected 'male' session.matchedValue.gender}}>Male</option>
+                                    <option value="female" {{selected 'female' session.matchedValue.gender}}>Female</option>
+                                    <option value="female" {{selected 'other' session.matchedValue.gender}}>Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="SDob">Date of Birth</label>
+                                <input type="text" class="form-control inputDate" name="SDob" id="SDob" value="{{ session.matchedValue.dob }}" />
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="religion">Religion</label>
+        
+                                <select name="religion" id="religion" class="form-control select2">
+                                    <option value="">Select Religion</option>
+                                    <option value="islam" {{selected 'islam' session.matchedValue.religion}}>Islam</option>
+                                    <option value="hinduism" {{selected 'hinduism' session.matchedValue.religion}}>Hinduism</option>
+                                    <option value="buddhists" {{selected 'buddhists' session.matchedValue.religion}}>Buddhists</option>
+                                    <option value="christians" {{selected 'christians' session.matchedValue.religion}}>Christians</option>
+                                    <option value="others" {{selected 'others' session.matchedValue.religion}}>Others</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="SMobile">Mobile No</label>
+                                <input type="text" class="form-control" placeholder="Enter Mobile No" name="SMobile"
+                                    id="SMobile" value="{{ session.matchedValue.SMobile }}"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="SEmail">Email</label>
+                                <input type="text" class="form-control" placeholder="Enter Email" name="SEmail" id="SEmail" value="{{ session.matchedValue.SEmail }}" />
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="blood">Blood Group</label>
+                                <select name="blood" id="blood" class="form-control select2">
+                                    <option value="">Select A Blood Group</option>
+                                    <option value="A-" {{selected 'A-' session.matchedValue.blood}}>A-</option>
+                                    <option value="A+" {{selected 'A+' session.matchedValue.blood}}>A+</option>
+                                    <option value="B+" {{selected 'B+' session.matchedValue.blood}}>B+</option>
+                                    <option value="B-" {{selected 'B-' session.matchedValue.blood}}>B-</option>
+                                    <option value="AB-" {{selected 'AB-' session.matchedValue.blood}}>AB-</option>
+                                    <option value="AB+" {{selected 'AB+' session.matchedValue.blood}}>AB+</option>
+                                    <option value="O" {{selected 'O-' session.matchedValue.blood}}>O-</option>
+                                    <option value="O+" {{selected 'O+' session.matchedValue.blood}}>O+</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="photo">Student Photo</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="photo" name="photo" value="{{ session.matchedValue.photo }}" />
+                                    <label class="custom-file-label" for="photo">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="SAddress">Address</label>
+                                <input class="form-control" placeholder="Enter Address" name="SAddress" id="SAddress"  value="{{ session.matchedValue.SAddress }}"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="remarks">Remarks</label>
+                                <input type="text" id="remarks" name="remarks" class="form-control" value="{{ session.matchedValue.remarks }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12"> 
 			<div class="card card-info">
 				<div class="card-header">
 					<h3 class="card-title">Academic Information</h3>
@@ -11,49 +127,57 @@
 					<div class="row">
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label>Select Class<sup>*</sup></label>
+								<label for="class">Select Class<sup>*</sup></label>
 								<select
 									name="class"
 									id="class"
-									class="form-control select2"
+                                    class="form-control"
+                                    
 								>
                                     {{#if classes}}
-                                    <option value="">Select Class</option>
-									{{#each classes}}
-									<option value="{{ _id }}">{{
-										name
-									}}</option>
-									{{/each}}
-									{{else }}
-									<option value=""
-										>Please 1st Add Class</option
-									>
+                                        <option value="">Select Class</option>
+                                        {{#selected2 session.matchedValue.class}}
+                                            {{#each classes}}
+                                                <option value="{{ _id }}">{{name}}</option>
+                                            {{/each}}
+                                        {{/selected2}}
+									{{else}}
+									<option value="">Please 1st Add Class</option>
 									{{/if}}
-								</select>
+                                </select>
+                                {{#if session.errors.class}}
+                                    <p class="error">
+                                        {{ session.errors.class.msg }}
+                                    </p>
+                                {{/if}}
 							</div>
 						</div>
 
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label>Select Section<sup>*</sup></label>
+								<label for="section">Select Section<sup>*</sup></label>
 								<select
 									name="section"
 									id="section"
-									class="form-control select2"
+                                    class="form-control "
+                                    
 								>
                                     {{#if sections}}
-                                    <option value="">Select Section</option>
-									{{#each sections}}
-									<option value="{{ _id }}">{{
-										name
-									}}</option>
-									{{/each}}
-									{{else }}
-									<option value=""
-										>Please 1st Add Section</option
-									>
+                                        <option value="">Select Section</option>
+                                        {{#selected2 session.matchedValue.section}}
+                                            {{#each sections}}
+                                                <option value="{{ _id }}">{{name}}</option>
+                                            {{/each}}
+                                        {{/selected2}}
+									{{else}}
+									<option value="">Please 1st Add Section</option>
 									{{/if}}
-								</select>
+                                </select>
+                                {{#if session.errors.section}}
+                                    <p class="error">
+                                        {{ session.errors.section.msg }}
+                                    </p>
+                                {{/if}}
 							</div>
 						</div>
 
@@ -65,48 +189,45 @@
 								<select
 									name="session"
 									id="session"
-									class="form-control select2"
+                                    class="form-control "
+                                    
 								>
                                     {{#if sessions}}
-                                    <option value="">Select Session</option>
-									{{#each sessions}}
-									<option value="{{ _id }}">{{
-										name
-									}}</option>
-									{{/each}}
+                                        <option value="">Select Session</option>
+                                        {{#selected2 session.matchedValue.session}}
+                                            {{#each sessions}}
+                                                <option value="{{ _id }}" >{{name}}</option>
+                                            {{/each}}
+                                        {{/selected2}}
 									{{else }}
-									<option value=""
-										>Please 1st Add Session</option
-									>
+									<option value="">Please 1st Add Session</option>
 									{{/if}}
-								</select>
+                                </select>
+                                {{#if session.errors.session}}
+                                    <p class="error">
+                                        {{ session.errors.session.msg }}
+                                    </p>
+                                {{/if}}
 							</div>
 						</div>
 
+					
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label for="admissionNo"
-									>Admission No<sup>*</sup></label
-								>
-								<input
-									type="text"
-									class="form-control"
-									placeholder="Enter Admission no"
-									name="admissionNo"
-									id="admissionNO"
-								/>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="form-group">
-								<label for="regNo">Registration No</label>
+								<label for="regNo">Registration No <sup>*</sup></label>
 								<input
 									type="text"
 									class="form-control"
 									placeholder="Enter ..."
 									name="regNo"
-									id="regNo"
-								/>
+                                    id="regNo"
+                                     value="{{ session.matchedValue.regNo }}"
+                                />
+                                {{#if session.errors.regNo}}
+                                    <p class="error">
+                                        {{ session.errors.regNo.msg }}
+                                    </p>
+                                {{/if}}
 							</div>
 						</div>
 						<div class="col-sm-3">
@@ -117,10 +238,22 @@
 									class="form-control"
 									placeholder="Enter ..."
 									name="rollNo"
-									id="rollNo"
-								/>
+                                    id="rollNo"
+                                     value="{{ session.matchedValue.rollNo }}"
+                                />
+                                {{#if session.errors.rollNo}}
+                                    <p class="error">
+                                        {{ session.errors.rollNo.msg }}
+                                    </p>
+                                {{/if}}
 							</div>
-						</div>
+                        </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="admissionNo">Admission No</label>
+                                    <input type="text" class="form-control" placeholder="Enter Admission no" name="admissionNo" id="admissionNo" value="{{ session.matchedValue.admissionNo }}"/>
+                                </div>
+                            </div>
 						<div class="col-sm-3">
 							<div class="form-group">
 								<label for="group">Select Group</label>
@@ -128,11 +261,22 @@
 									name="group"
 									id="group"
 									class="form-control select2"
-									name="group"
-								>
-									<option value="">Select Group</option>
-									<option value="science">Science</option>
-									<option value="arts">Arts</option>
+                                    name="group"
+                                    name="group"
+                                >
+                                
+                                    {{#if groups}}
+                                        <!-- <option value="">Select Group</option> -->
+                                        {{#selected2 session.matchedValue.group}}
+                                            {{#each groups}}
+                                                <option value="{{ _id }}">{{name}}</option>
+                                            {{/each}}
+                                        {{/selected2}}
+                                    {{else }}
+                                        <option value="">Please 1st Add Group</option>
+                                    {{/if}}
+                                
+									
 								</select>
 							</div>
 						</div>
@@ -140,166 +284,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-12">
-			<div class="card card-info">
-				<div class="card-header">
-					<h3 class="card-title">Student Information</h3>
-				</div>
-
-				<div class="card-body">
-					<div class="row">
-						<div class="col-sm-3">
-							<div class="form-group">
-								<label for="SFirstName"
-									>First Name <sup>*</sup></label
-								>
-								<input
-									name="SFirstName"
-									id="SFirstName"
-									class="form-control"
-								/>
-							</div>
-						</div>
-
-						<div class="col-sm-3">
-							<div class="form-group">
-								<label for="SLastName"
-									>Last Name <sup>*</sup></label
-								>
-								<input
-									name="SLastName"
-									id="SLastName"
-									class="form-control"
-								/>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="form-group">
-								<label for="gender"
-									>Select Gender <sup>*</sup></label
-								>
-								<select
-									name="gender"
-									id="gender"
-									class="form-control select2"
-									name="gender"
-								>
-									<option value="" >Select A Gender</option>
-									<option value="male">Male</option>
-									<option value="female">Female</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="form-group">
-								<label for="dob"
-									>Date of Birth <sup>*</sup></label
-								>
-								<input
-									type="text"
-									class="form-control inputDate"
-									name="dob"
-                                    id="dob"
-                                    value=""
-								/>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="form-group">
-								<label for="religion"
-									>Religion</label
-								>
-								<input
-									type="text"
-									class="form-control"
-									placeholder="Enter Religion"
-									name="religion"
-									id="religion"
-								/>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="form-group">
-								<label for="SMobile"
-									>Mobile No</label
-								>
-								<input
-									type="text"
-									class="form-control"
-									placeholder="Enter Mobile No"
-									name="SMobile"
-									id="SMobile"
-								/>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="form-group">
-								<label for="SEmail">Email</label>
-								<input
-									type="text"
-									class="form-control"
-									placeholder="Enter Email"
-									name="SEmail"
-									id="SEmail"
-								/>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="form-group">
-								<label for="blood">Blood Group</label>
-								<select
-									name="blood"
-									id="blood"
-									class="form-control select2"
-								>
-									<option value=""
-										>Select A Blood Group</option
-									>
-									<option value="A-">A-</option>
-									<option value="A+">A+</option>
-									<option value="B+">B+</option>
-									<option value="B-">B-</option>
-									<option value="AB-">AB-</option>
-									<option value="AB+">AB+</option>
-									<option value="O">O-</option>
-									<option value="O+">O+</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="form-group">
-								<label for="photo">Student Photo</label>
-								<div class="custom-file">
-									<input
-										type="file"
-										class="custom-file-input"
-                                        id="photo"
-                                        name="photo"
-									/>
-									<label
-										class="custom-file-label"
-										for="photo"
-										>Choose file</label
-									>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label for="SAddress">Address</label>
-								<textarea
-									class="form-control"
-									rows="1"
-									placeholder="Enter Address"
-									name="SAddress"
-									id="SAddress"
-								></textarea>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 		<div class="col-12">
 			<div class="card card-info">
 				<div class="card-header">
@@ -317,8 +302,14 @@
 									name="PFirstName"
 									id="PFirstName"
 									class="form-control"
-									placeholder="Enter Parent First Name"
-								/>
+                                    placeholder="Enter Parent First Name"
+                                    value="{{ session.matchedValue.PFirstName}}"
+                                />
+                                {{#if session.errors.PFirstName}}
+                                    <p class="error">
+                                        {{ session.errors.PFirstName.msg }}
+                                    </p>
+                                {{/if}}
 							</div>
 						</div>
 
@@ -331,8 +322,14 @@
 									name="PLastName"
 									id="PLastName"
 									class="form-control"
-									placeholder="Enter Parent Last Name"
-								/>
+                                    placeholder="Enter Parent Last Name"
+                                    value="{{ session.matchedValue.PLastName }}"
+                                />
+                                {{#if session.errors.PLastName}}
+                                    <p class="error">
+                                        {{ session.errors.PLastName.msg }}
+                                    </p>
+                                {{/if}}
 							</div>
 						</div>
 
@@ -346,8 +343,14 @@
 									class="form-control"
 									placeholder="Enter Parent Mobile"
 									name="PMobile"
-									id="PMobile"
-								/>
+                                    id="PMobile"
+                                    value="{{session.matchedValue.PMobile}}"
+                                />
+                                {{#if session.errors.PMobile}}
+                                    <p class="error">
+                                        {{ session.errors.PMobile.msg }}
+                                    </p>
+                                {{/if}}
 							</div>
 						</div>
 						<div class="col-sm-3">
@@ -358,7 +361,8 @@
 									class="form-control"
 									placeholder="Enter Parent occupation"
 									name="occupation"
-									id="occupation"
+                                    id="occupation"
+                                    value="{{ session.matchedValue.occupation }}"
 								/>
 							</div>
 						</div>
@@ -370,20 +374,21 @@
 									class="form-control"
 									placeholder="Enter Parent Email"
 									name="PEmail"
-									id="PEmail"
+                                    id="PEmail"
+                                    value="{{ session.matchedValue.PEmail }}"
 								/>
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label for="PAddress">Address</label>
-								<textarea
+								<input
 									class="form-control"
-									rows="1"
+									value="{{ session.matchedValue.PAddress }}"
 									placeholder="Enter Parent Address"
 									name="PAddress"
 									id="PAddress"
-								></textarea>
+								/>
 							</div>
 						</div>
 						<div class="col-sm-12">

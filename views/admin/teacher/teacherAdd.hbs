@@ -1,7 +1,5 @@
 {{> contentHeader page="Teacher" subPage="Create"}}
-{{#if success}}
-<h1>Error</h1>
-{{/if}}
+
 <div class="row">
 	<div class="col-8">
 		<div class="card card-info">
@@ -93,11 +91,7 @@
 										session.matchedValue.designation
 									}}"
 								/>
-								{{#if session.errors.designation}}
-								<p class="error">
-									{{ session.errors.designation.msg }}
-								</p>
-								{{/if}}
+								
 							</div>
 						</div>
 						<div class="col-sm-6">
@@ -115,11 +109,7 @@
                                         <option value="{{_id}}" {{selected _id session.matchedValue.dept}}>{{name}}</option>
                                     {{/each}}
 								</select>
-								{{#if session.errors.dept}}
-								<p class="error">
-									{{ session.errors.dept.msg }}
-								</p>
-								{{/if}}
+								
 							</div>
 						</div>
 						<div class="col-sm-6">
@@ -175,11 +165,7 @@
 									</option>
 									
 								</select>
-								{{#if session.errors.gender}}
-								<p class="error">
-									{{ session.errors.gender.msg }}
-								</p>
-								{{/if}}
+								
 							</div>
 						</div>
 						<div class="col-sm-6">
@@ -194,11 +180,7 @@
 									name="dob"
 									value="{{ session.matchedValue.dob }}"
 								/>
-								{{#if session.errors.dob}}
-								<p class="error">
-									{{ session.errors.dob.msg }}
-								</p>
-								{{/if}}
+								
 							</div>
 						</div>
 						<div class="col-sm-6">
@@ -213,11 +195,7 @@
 									name="joinDate"
 									value="{{ session.matchedValue.joinDate }}"
 								/>
-								{{#if session.errors.joinDate}}
-								<p class="error">
-									{{ session.errors.joinDate.msg }}
-								</p>
-								{{/if}}
+								
 							</div>
 						</div>
 						<div class="col-sm-6">
@@ -233,11 +211,7 @@
 									placeholder="Enter Your Religion"
 									value="{{ session.matchedValue.religion }}"
 								/>
-								{{#if session.errors.religion}}
-								<p class="error">
-									{{ session.errors.religion.msg }}
-								</p>
-								{{/if}}
+								
 							</div>
 						</div>
 
@@ -285,11 +259,7 @@
 										>
 									</div>
 								</div>
-								{{#if session.errors.photo}}
-								<p class="error">
-									{{ session.errors.photo.msg }}
-								</p>
-								{{/if}}
+								
 							</div>
 						</div>
 

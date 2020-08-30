@@ -120,7 +120,7 @@ module.exports = {
 		const fileName = req.file != null ? req.file.filename : null;
         
         req.body.photo = fileName;
-		const teacher = new Teacher(req.body);
+		const teacher =  new Teacher(req.body);
         // console.log(teacher)
         
         try {
