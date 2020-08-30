@@ -30,6 +30,19 @@ module.exports = {
 			res.status(500).render('error/500');
 		}
 	},
+	class_index_list: async (req, res) => {
+		try {
+			const classes = await Class.find().lean().sort({ name: 'asc' });
+
+			if (classes.length == 0) {
+				return res.status(404).json(classes);
+			}
+			res.status(200).json(classes);
+		} catch (err) {
+			console.log(err);
+			res.status(500).render('error/500');
+		}
+	},
 	class_details: async (req, res) => {
 		const id = req.params.id;
 		try {

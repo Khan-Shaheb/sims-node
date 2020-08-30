@@ -24,8 +24,11 @@ img#photo2 {
 .updateForm .form-group:last-child {
 	margin-bottom: 0 !important;
 }
-.teacher-modal-dialog {
+.teacher-modal-dialog  {
 	max-width: 800px;
+}
+.student-modal-dialog {
+    max-width: 1000px;
 }
 .my-circle-img {
     min-width: 150px;

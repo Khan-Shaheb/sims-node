@@ -2,11 +2,7 @@ const { body, validationResult, matchedData } = require('express-validator');
 
 const teacherValidationRules = () => {
 	return [
-		body('fullName')
-			.trim()
-			.notEmpty()
-			.withMessage('Name is Required!')
-			.escape(),
+		body('fullName').trim().notEmpty().withMessage('Name is Required!').escape(),
 
 		body('email')
 			.trim()
@@ -30,11 +26,7 @@ const teacherValidationRules = () => {
 			.withMessage('Please enter a valid phone number')
 			.escape(),
 
-		body('address')
-			.trim()
-			.notEmpty()
-			.withMessage('Address is Required!')
-			.escape(),
+		body('address').trim().notEmpty().withMessage('Address is Required!').escape(),
 		body('designation').trim().escape(),
 		body('dob').trim().escape(),
 		body('joinDate').trim().escape(),
@@ -49,9 +41,8 @@ const teacherValidate = (req, res, next) => {
 	const errors = validationResult(req);
 	const matchedValue = matchedData(req);
 
-    // console.dir(matchedValue);
-    // console.dir(errors);
-
+	// console.dir(matchedValue);
+	// console.dir(errors);
 
 	if (errors.isEmpty()) {
 		req.session.success = true;
@@ -61,34 +52,18 @@ const teacherValidate = (req, res, next) => {
 
 	req.session.errors = errors.mapped();
 	req.session.matchedValue = matchedValue;
-    req.session.success = false;
-    // if js disable then we need it
-   res.redirect(req.originalUrl);
+	req.session.success = false;
+	// if js disable then we need it
+	res.redirect(req.originalUrl);
 	return;
 };
 
 const studentValidationRules = () => {
 	return [
-		body('SFirstName')
-			.trim()
-			.notEmpty()
-			.withMessage('First Name is Required!')
-			.escape(),
-		body('SLastName')
-			.trim()
-			.notEmpty()
-			.withMessage('Last Name is Required!')
-			.escape(),
-		body('PFirstName')
-			.trim()
-			.notEmpty()
-			.withMessage('Parent First Name is Required!')
-			.escape(),
-		body('PLastName')
-			.trim()
-			.notEmpty()
-			.withMessage('Parent Last Name is Required!')
-			.escape(),
+		body('SFirstName').trim().notEmpty().withMessage('First Name is Required!').escape(),
+		body('SLastName').trim().notEmpty().withMessage('Last Name is Required!').escape(),
+		body('PFirstName').trim().notEmpty().withMessage('Parent First Name is Required!').escape(),
+		body('PLastName').trim().notEmpty().withMessage('Parent Last Name is Required!').escape(),
 		body('PMobile')
 			.trim()
 			.notEmpty()
@@ -98,26 +73,10 @@ const studentValidationRules = () => {
 			.withMessage('Please enter a valid mobile number')
 			.escape(),
 
-		body('class')
-			.trim()
-			.notEmpty()
-			.withMessage('Class is Required!')
-			.escape(),
-		body('section')
-			.trim()
-			.notEmpty()
-			.withMessage('Section is Required!')
-			.escape(),
-		body('session')
-			.trim()
-			.notEmpty()
-			.withMessage('Session is Required!')
-			.escape(),
-		body('regNo')
-			.trim()
-			.notEmpty()
-			.withMessage('Registration No is Required!')
-			.escape(),
+		body('_class').trim().notEmpty().withMessage('Class is Required!').escape(),
+		body('section').trim().notEmpty().withMessage('Section is Required!').escape(),
+		body('session').trim().notEmpty().withMessage('Session is Required!').escape(),
+		body('regNo').trim().notEmpty().withMessage('Registration No is Required!').escape(),
 		body('rollNo')
 			.trim()
 			.notEmpty()
@@ -126,7 +85,7 @@ const studentValidationRules = () => {
 			.toInt()
 			.withMessage('Please enter a valid Roll number')
 			.escape(),
-		body('dob').trim().escape(),
+		body('SDob').trim(),
 		body('religion').trim().escape(),
 		body('gender').trim().escape(),
 		body('SMobile').trim().escape(),
@@ -147,9 +106,8 @@ const studentValidate = (req, res, next) => {
 	const errors = validationResult(req);
 	const matchedValue = matchedData(req);
 
-    console.dir(matchedValue);
-    // console.dir(errors);
-
+	// console.dir(matchedValue);
+	// console.dir(errors);
 
 	if (errors.isEmpty()) {
 		req.session.success = true;
@@ -159,9 +117,9 @@ const studentValidate = (req, res, next) => {
 
 	req.session.errors = errors.mapped();
 	req.session.matchedValue = matchedValue;
-    req.session.success = false;
-    // if js disable then we need it
-   res.redirect(req.originalUrl);
+	req.session.success = false;
+	// if js disable then we need it
+	res.redirect(req.originalUrl);
 	return;
 };
 

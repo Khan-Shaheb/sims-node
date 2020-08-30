@@ -14,20 +14,19 @@ const storage = multer.diskStorage({
 });
 const upload = multer({
 	storage: storage,
-	fileFilter: (req, file, callback) =>
-		callback(null, imageMimeTypes.includes(file.mimetype)),
+	fileFilter: (req, file, callback) => callback(null, imageMimeTypes.includes(file.mimetype)),
 });
 const {
 	student_index,
 	student_create_get,
 	student_create,
+	student_details,
+	student_delete,
+	student_update,
 } = require('../../controllers/admin/studentController');
 
 router.get('/', student_index);
-router.get(
-	'/create',
-	student_create_get
-);
+router.get('/create', student_create_get);
 router.post(
 	'/create',
 	upload.single('photo'),
@@ -35,5 +34,8 @@ router.post(
 	student.studentValidate,
 	student_create
 );
+router.delete('/:id', student_delete);
+router.get('/:id', student_details);
+router.put('/', upload.single('photo'), student.studentValidationRules(), student.studentValidate, student_update);
 
 module.exports = router;

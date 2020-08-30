@@ -60,7 +60,7 @@
             })
 
             if (url == 'class') {
-                let { data: sections } = await axios.get('/section/get-section-for-class');
+                let { data: sections } = await axios.get('/section/get-all-section-list');
 
                 const sectionCheckBoxWrap = document.querySelector('.section-checkbox-edit-wrap');
                 let html = '';
@@ -146,16 +146,7 @@
         document.querySelector(".deleteBtn").dataset.id = id;
     }
 
-    async function deleteSingleItem(deleteBtn, url) {
-        const id = deleteBtn.dataset.id;
-        try {
-            let response = await axios.delete(`/${url}/${id}`);
-            console.log(response)
-            location.href = response.data.url;
-        } catch (err) {
-            console.log(err);
-        }
-    }
+   
 
 </script>
 
@@ -298,20 +289,18 @@
             },
             highlight: function (element, errorClass, validClass) {
                 $(element).addClass('is-invalid');
-                if($(element).hasClass('select2')) {
-                    $(element.nextSibling).addClass('is-invalid')
+                // if($(element).hasClass('select2')) {
+                //     $(element.nextSibling).addClass('is-invalid')
                     
-                }
+                // }
             },
             unhighlight: function (element, errorClass, validClass) {
                 $(element).removeClass('is-invalid');
-                console.dir(element);
-                console.log(element);
-                if ($(element).hasClass('select2')) {
-                    console.log(element);
-                    $(element.nextSibling).removeClass('is-invalid')
+                // if ($(element).hasClass('select2')) {
+                //     console.log(element);
+                //     $(element.nextSibling).removeClass('is-invalid')
 
-                }
+                // }
             }
         });
 
@@ -319,7 +308,7 @@
     });
 </script>
 
-
+<script src="/js/main.js"></script>
 
 
 

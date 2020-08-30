@@ -73,4 +73,17 @@ module.exports = {
 			res.status(500).render('error/500');
 		}
 	},
+	session_index_list: async (req, res) => {
+		try {
+			const sessions = await Session.find().lean().sort({ name: 'asc' });
+
+			if (sessions.length == 0) {
+				return res.status(404).json(sessions);
+			}
+			res.status(200).json(sessions);
+		} catch (err) {
+			console.log(err);
+			res.status(500).render('error/500');
+		}
+	},
 };

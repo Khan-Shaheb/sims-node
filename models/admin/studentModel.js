@@ -13,7 +13,7 @@ const studentSchema = new Schema({
 	gender: {
 		type: String,
 	},
-	dob: {
+	SDob: {
 		type: String,
 	},
 	religion: {
@@ -37,7 +37,7 @@ const studentSchema = new Schema({
 	remarks: {
 		type: String,
 	},
-	class: {
+	_class: {
 		type: Schema.Types.ObjectId,
 		ref: 'class',
 		required: true,
@@ -65,7 +65,28 @@ const studentSchema = new Schema({
 		ref: 'department',
 	},
 	admissionNo: {
+		type: String,
+	},
+	PFirstName: {
+		type: String,
+		required: true,
+	},
+	PLastName: {
+		type: String,
+		required: true,
+	},
+	PMobile: {
 		type: Number,
+		required: true,
+	},
+	occupation: {
+		type: String,
+	},
+	PEmail: {
+		type: String,
+	},
+	PAddress: {
+		type: String,
 	},
 });
 

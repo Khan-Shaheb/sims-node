@@ -5,12 +5,12 @@ const {
 	section_create,
 	section_delete,
 	section_details,
-	section_details_for_class,
+	section_index_list,
 	section_index,
 } = require('../../controllers/admin/sectionController');
 
 router.get('/', section_index);
-router.get('/get-section-for-class', section_details_for_class);
+router.get('/get-all-section-list', section_index_list);
 router.get('/:id', section_details);
 router.post('/', section_create);
 router.delete('/:id', section_delete);

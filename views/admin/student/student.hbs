@@ -47,10 +47,10 @@
                                                 {{ SFirstName }} {{SLastName}}
                                             </td>
                                             <td class="sorting_1 text-center">
-                                                {{ class }}
+                                                {{ class.name }}
                                             </td>
                                             <td class="sorting_1 text-center">
-                                                {{ section }}
+                                                {{ section.name }}
                                             </td>
                                             <td class="sorting_1 text-center">
                                                 {{ regNo }}
@@ -59,17 +59,17 @@
                                                 {{ rollNo }}
                                             </td>
                                             <td class="text-center">
-                                                <button data-id="{{_id}}" onclick="showUpdateModal(this, 'student')"
+                                                <button data-id="{{_id}}" onclick="studentUpdateModal(this, 'student')"
                                                     data-toggle="modal" data-target="#update"
                                                     class="btn btn-info btn-small">
                                                     Edit
                                                 </button>
-                                                <button data-id="{{_id}}" onclick="showDeleteModal(this)"
+                                                <button data-id="{{_id}}" onclick="studentDeleteModal(this)"
                                                     data-toggle="modal" data-target="#delete"
                                                     class="btn btn-danger btn-small">
                                                     Delete
                                                 </button>
-                                                <button data-id="{{_id}}" onclick="showDetailsModal(this, 'student')"
+                                                <button data-id="{{_id}}" onclick="studentDetailsModal(this, 'student')"
                                                     data-toggle="modal" data-target="#details"
                                                     class="btn btn-primary btn-small">
                                                     Details
@@ -146,160 +146,268 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form role="form" method="POST" class="updateForm my-form form-horizontal" action="/student?_method=PUT"
-                enctype="multipart/form-data">
+            <form role="form" method="POST" class="updateForm my-form form-horizontal" action="/student?_method=PUT" enctype="multipart/form-data">
                 <div class="modal-body">
 
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="gender" class="col-form-label">Full Name <sup>*</sup>
-                                </label>
-
-                                <input type="text" class="form-control updateInputField" id="fullName" name="fullName"
-                                    placeholder="Enter Full Name" />
-
-                                {{#if session.errors.fullName}}
-                                    <p class="error">
-                                        {{ session.errors.fullName.msg }}
-                                    </p>
-                                {{/if}}
-                            </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="SFirstName">First Name <sup>*</sup></label>
+                            <input name="SFirstName" id="SFirstName" class="form-control updateInputField"
+                                value="{{ session.matchedValue.SFirstName }}" />
+                            {{#if session.errors.SFirstName}}
+                                <p class="error">
+                                    {{ session.errors.SFirstName.msg }}
+                                </p>
+                            {{/if}}
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="email" class="col-form-label">Email<sup>*</sup></label>
-
-                                <input type="text" class="form-control updateInputField" id="email" name="email"
-                                    placeholder="Enter Your Email" />
-                                {{#if session.errors.email}}
-                                    <p class="error">
-                                        {{ session.errors.email.msg }}
-                                    </p>
-                                {{/if}}
-                            </div>
+                    </div>
+                
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="SLastName">Last Name <sup>*</sup></label>
+                            <input name="SLastName" id="SLastName" class="form-control updateInputField" value="{{ session.matchedValue.SLastName }}" />
+                            {{#if session.errors.SLastName}}
+                                <p class="error">
+                                    {{ session.errors.SLastName.msg }}
+                                </p>
+                            {{/if}}
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="password" class="col-form-label">Password<sup>*</sup></label>
-
-                                <input type="text" class="form-control updateInputField" id="password" name="password"
-                                    placeholder="Enter Your Password" />
-                                {{#if session.errors.password}}
-                                    <p class="error">
-                                        {{ session.errors.password.msg }}
-                                    </p>
-                                {{/if}}
-                            </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="gender">Select Gender</label>
+                            <select name="gender" id="gender" class="form-control updateInputField" name="gender">
+                                <option value="">Select Gender</option>
+                                <option value="male" {{selected 'male' session.matchedValue.gender}}>Male</option>
+                                <option value="female" {{selected 'female' session.matchedValue.gender}}>Female</option>
+                                <option value="female" {{selected 'other' session.matchedValue.gender}}>Other</option>
+                            </select>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="designation" class="col-form-label">Designation<sup>*</sup></label>
-
-                                <input type="text" class="form-control updateInputField" id="designation"
-                                    name="designation" placeholder="Enter Your Designation" />
-
-                            </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="SDob">Date of Birth</label>
+                            <input type="text" class="form-control updateInputField inputDate" name="SDob" id="SDob" />
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="dept" class="col-form-label">Select dept</label>
-
-                                <select class="form-control updateInputField select2 dept-edit-wrap" name="dept"
-                                    id="dept">
-
-                                </select>
-
-                            </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="religion">Religion</label>
+                
+                            <select name="religion" id="religion" class="form-control updateInputField select2">
+                                <option value="">Select Religion</option>
+                                <option value="islam" {{selected 'islam' session.matchedValue.religion}}>Islam</option>
+                                <option value="hinduism" {{selected 'hinduism' session.matchedValue.religion}}>Hinduism</option>
+                                <option value="buddhists" {{selected 'buddhists' session.matchedValue.religion}}>Buddhists</option>
+                                <option value="christians" {{selected 'christians' session.matchedValue.religion}}>Christians</option>
+                                <option value="others" {{selected 'others' session.matchedValue.religion}}>Others</option>
+                            </select>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="phone" class="col-form-label">Phone Number<sup>*</sup></label>
-
-                                <input type="text" class="form-control updateInputField" id="phone" name="phone"
-                                    placeholder="Enter Phone Number" />
-                                {{#if session.errors.phone}}
-                                    <p class="error">
-                                        {{ session.errors.phone.msg }}
-                                    </p>
-                                {{/if}}
-                            </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="SMobile">Mobile No</label>
+                            <input type="text" class="form-control updateInputField" placeholder="Enter Mobile No" name="SMobile" id="SMobile"
+                                value="{{ session.matchedValue.SMobile }}" />
                         </div>
-
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="gender" class="col-form-label">Gender</label>
-
-                                <select class="form-control updateInputField select2" name="gender" id="gender">
-
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="other">Other</option>
-                                </select>
-
-                            </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="SEmail">Email</label>
+                            <input type="text" class="form-control updateInputField" placeholder="Enter Email" name="SEmail" id="SEmail"
+                                value="{{ session.matchedValue.SEmail }}" />
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="dob" class="col-form-label">Date of Birth</label>
-                                <input type="text" class="form-control inputDate updateInputField" id="dob"
-                                    name="dob" />
-
-                            </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="blood">Blood Group</label>
+                            <select name="blood" id="blood" class="form-control updateInputField select2">
+                                <option value="">Select A Blood Group</option>
+                                <option value="A-" {{selected 'A-' session.matchedValue.blood}}>A-</option>
+                                <option value="A+" {{selected 'A+' session.matchedValue.blood}}>A+</option>
+                                <option value="B+" {{selected 'B+' session.matchedValue.blood}}>B+</option>
+                                <option value="B-" {{selected 'B-' session.matchedValue.blood}}>B-</option>
+                                <option value="AB-" {{selected 'AB-' session.matchedValue.blood}}>AB-</option>
+                                <option value="AB+" {{selected 'AB+' session.matchedValue.blood}}>AB+</option>
+                                <option value="O" {{selected 'O-' session.matchedValue.blood}}>O-</option>
+                                <option value="O+" {{selected 'O+' session.matchedValue.blood}}>O+</option>
+                            </select>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="joinDate" class="col-form-label">Joining Date</label>
-                                <input type="text" class="form-control inputDate updateInputField" id="joinDate"
-                                    name="joinDate" />
-
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="religion" class="col-form-label">Religion</label>
-                                <input type="text" class="form-control updateInputField" id="religion" name="religion"
-                                    placeholder="Enter Your Religion" />
-
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="address" class="col-form-label">Address<sup>*</sup></label>
-
-                                <input type="text" class="form-control updateInputField" id="address" name="address"
-                                    placeholder="Enter Address" />
-                                {{#if session.errors.address}}
-                                    <p class="error">
-                                        {{ session.errors.address.msg }}
-                                    </p>
-                                {{/if}}
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="photo">Photo</label>
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input " id="photo" name="photo" />
-                                        <label class="custom-file-label photo-custom-file" for="photo">
-                                            Choose Photo
-                                        </label>
-                                    </div>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text" id="">Upload</span>
-                                    </div>
-                                </div>
-
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="photo">Student Photo</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="photo" name="photo"
+                                    value="{{ session.matchedValue.photo }}" />
+                                <label class="custom-file-label" for="photo">Choose file</label>
                             </div>
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="SAddress">Address</label>
+                            <input class="form-control updateInputField" placeholder="Enter Address" name="SAddress" id="SAddress"
+                                value="{{ session.matchedValue.SAddress }}" />
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="remarks">Remarks</label>
+                            <input type="text" id="remarks" name="remarks" class="form-control updateInputField"
+                                value="{{ session.matchedValue.remarks }}">
+                        </div>
+                    </div>
+              
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="_class">Select Class<sup>*</sup></label>
+                            <select name="_class" id="_class" class="form-control updateInputField class-edit-wrap">
+                              
+                            </select>
+                            {{#if session.errors.class}}
+                                <p class="error">
+                                    {{ session.errors.class.msg }}
+                                </p>
+                            {{/if}}
+                        </div>
+                    </div>
+                
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="section">Select Section<sup>*</sup></label>
+                            <select name="section" id="section" class="form-control updateInputField section-edit-wrap">
+                               
+                            </select>
+                            {{#if session.errors.section}}
+                                <p class="error">
+                                    {{ session.errors.section.msg }}
+                                </p>
+                            {{/if}}
+                        </div>
+                    </div>
+                
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="session">Select Session<sup>*</sup></label>
+                            <select name="session" id="session" class="form-control updateInputField session-edit-wrap">
+                                
+                            </select>
+                            {{#if session.errors.session}}
+                                <p class="error">
+                                    {{ session.errors.session.msg }}
+                                </p>
+                            {{/if}}
+                        </div>
+                    </div>
+                
+                
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="regNo">Registration No <sup>*</sup></label>
+                            <input type="text" class="form-control updateInputField" placeholder="Enter ..." name="regNo" id="regNo"
+                                value="{{ session.matchedValue.regNo }}" />
+                            {{#if session.errors.regNo}}
+                                <p class="error">
+                                    {{ session.errors.regNo.msg }}
+                                </p>
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="rollNo">Roll No<sup>*</sup></label>
+                            <input type="text" class="form-control updateInputField" placeholder="Enter ..." name="rollNo" id="rollNo"
+                                value="{{ session.matchedValue.rollNo }}" />
+                            {{#if session.errors.rollNo}}
+                                <p class="error">
+                                    {{ session.errors.rollNo.msg }}
+                                </p>
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="admissionNo">Admission No</label>
+                            <input type="text" class="form-control updateInputField" placeholder="Enter Admission no" name="admissionNo" id="admissionNo"
+                                value="{{ session.matchedValue.admissionNo }}" />
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="group">Select Group</label>
+                            <select name="group" id="group" class="form-control updateInputField group-edit-wrap" name="group" name="group">
 
-                    <input type="hidden" name="_id" class="hiddenId updateInputField">
+                            </select>
+                        </div>
+                        </div>
+                   
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="PFirstName">First Name <sup>*</sup></label>
+                                <input name="PFirstName" id="PFirstName" class="form-control updateInputField" placeholder="Enter Parent First Name"
+                                    value="{{ session.matchedValue.PFirstName}}" />
+                                {{#if session.errors.PFirstName}}
+                                    <p class="error">
+                                        {{ session.errors.PFirstName.msg }}
+                                    </p>
+                                {{/if}}
+                            </div>
+                        </div>
+                    
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="PLastName">Last Name <sup>*</sup></label>
+                                <input name="PLastName" id="PLastName" class="form-control updateInputField" placeholder="Enter Parent Last Name"
+                                    value="{{ session.matchedValue.PLastName }}" />
+                                {{#if session.errors.PLastName}}
+                                    <p class="error">
+                                        {{ session.errors.PLastName.msg }}
+                                    </p>
+                                {{/if}}
+                            </div>
+                        </div>
+                    
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="PMobile">Mobile No <sup>*</sup></label>
+                                <input type="text" class="form-control updateInputField" placeholder="Enter Parent Mobile" name="PMobile" id="PMobile"
+                                    value="{{session.matchedValue.PMobile}}" />
+                                {{#if session.errors.PMobile}}
+                                    <p class="error">
+                                        {{ session.errors.PMobile.msg }}
+                                    </p>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="occupation">Occupation</label>
+                                <input type="text" class="form-control updateInputField" placeholder="Enter Parent occupation" name="occupation"
+                                    id="occupation" value="{{ session.matchedValue.occupation }}" />
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="PEmail">Email</label>
+                                <input type="text" class="form-control updateInputField" placeholder="Enter Parent Email" name="PEmail" id="PEmail"
+                                    value="{{ session.matchedValue.PEmail }}" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="PAddress">Address</label>
+                                <input class="form-control updateInputField" value="{{ session.matchedValue.PAddress }}" placeholder="Enter Parent Address"
+                                    name="PAddress" id="PAddress" />
+                            </div>
+                        </div>
                 </div>
-                <div class="modal-footer justify-content-between">
-                    <button style="width: 100%;" type="submit" class="btn btn-light">Update</button>
+
+                <input type="hidden" name="_id" class="hiddenId updateInputField">
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button style="width: 50%;" type="submit" class="btn btn-light">Update</button>
                 </div>
             </form>
         </div>

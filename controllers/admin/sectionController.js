@@ -76,7 +76,7 @@ module.exports = {
 			res.status(500).render('error/500');
 		}
 	},
-	section_details_for_class: async (req, res) => {
+	section_index_list: async (req, res) => {
 		try {
 			const sections = await Section.find().lean().sort({ name: 'asc' });
 			if (sections.length == 0) {
