@@ -2,7 +2,7 @@ const { body, validationResult, matchedData } = require('express-validator');
 
 const teacherValidationRules = () => {
 	return [
-		body('fullName').trim().notEmpty().withMessage('Name is Required!').escape(),
+		body('full_name').trim().notEmpty().withMessage('Name is Required!').escape(),
 
 		body('email')
 			.trim()
@@ -28,8 +28,8 @@ const teacherValidationRules = () => {
 
 		body('address').trim().notEmpty().withMessage('Address is Required!').escape(),
 		body('designation').trim().escape(),
-		body('dob').trim().escape(),
-		body('joinDate').trim().escape(),
+		body('dob').trim(),
+		body('joining_date').trim(),
 		body('religion').trim().escape(),
 		body('gender').trim().escape(),
 		body('dept').trim().escape(),
@@ -60,11 +60,11 @@ const teacherValidate = (req, res, next) => {
 
 const studentValidationRules = () => {
 	return [
-		body('SFirstName').trim().notEmpty().withMessage('First Name is Required!').escape(),
-		body('SLastName').trim().notEmpty().withMessage('Last Name is Required!').escape(),
-		body('PFirstName').trim().notEmpty().withMessage('Parent First Name is Required!').escape(),
-		body('PLastName').trim().notEmpty().withMessage('Parent Last Name is Required!').escape(),
-		body('PMobile')
+		body('student_first_name').trim().notEmpty().withMessage('First Name is Required!').escape(),
+		body('student_last_name').trim().notEmpty().withMessage('Last Name is Required!').escape(),
+		body('parent_first_name').trim().notEmpty().withMessage('Parent First Name is Required!').escape(),
+		body('parent_last_name').trim().notEmpty().withMessage('Parent Last Name is Required!').escape(),
+		body('parent_mobile')
 			.trim()
 			.notEmpty()
 			.withMessage('Mobile Number is Required!')
@@ -76,8 +76,8 @@ const studentValidationRules = () => {
 		body('_class').trim().notEmpty().withMessage('Class is Required!').escape(),
 		body('section').trim().notEmpty().withMessage('Section is Required!').escape(),
 		body('session').trim().notEmpty().withMessage('Session is Required!').escape(),
-		body('regNo').trim().notEmpty().withMessage('Registration No is Required!').escape(),
-		body('rollNo')
+		body('registration_no').trim().notEmpty().withMessage('Registration No is Required!').escape(),
+		body('roll_no')
 			.trim()
 			.notEmpty()
 			.withMessage('Roll No is Required!')
@@ -85,20 +85,20 @@ const studentValidationRules = () => {
 			.toInt()
 			.withMessage('Please enter a valid Roll number')
 			.escape(),
-		body('SDob').trim(),
+		body('student_dob').trim(),
 		body('religion').trim().escape(),
 		body('gender').trim().escape(),
-		body('SMobile').trim().escape(),
-		body('SEmail').trim().escape(),
+		body('student_mobile').trim().escape(),
+		body('student_email').trim().escape(),
 		body('blood').trim().escape(),
 		body('photo').trim().escape(),
-		body('SAddress').trim().escape(),
+		body('student_address').trim().escape(),
 		body('remarks').trim().escape(),
-		body('admissionNo').trim().escape(),
+		body('admission_no').trim().escape(),
 		body('group').trim().escape(),
-		body('PEmail').trim().escape(),
-		body('PAddress').trim().escape(),
-		body('occupation').trim().escape(),
+		body('parent_email').trim().escape(),
+		body('parent_address').trim().escape(),
+		body('parent_occupation').trim().escape(),
 	];
 };
 

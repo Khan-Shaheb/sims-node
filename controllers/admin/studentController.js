@@ -14,7 +14,7 @@ module.exports = {
 				.populate('section')
 				.populate('semester')
 				.populate('department')
-				.sort({ SFirstName: 'asc' })
+				.sort({ student_first_name: 'asc' })
 				.lean();
 
 			res.render('admin/student/student', { students });
@@ -82,12 +82,10 @@ module.exports = {
 				return res.redirect('/student');
 			}
 
-			// if don't select image delete before image
-			// if (!req.file) {
-			// 	fs.unlink('public/' + updatestudent.photo, (err) =>
-			// 		console.log(err)
-			// 	);
-			// }
+			// if  select new image then delete old image from disk
+			if (req.file && updateStudent.photo != null) {
+				fs.unlink('public/' + updateStudent.photo, (err) => console.log(err));
+			}
 
 			// get the image file name
 			const fileName = req.file != null ? req.file.filename : null;
@@ -130,7 +128,7 @@ module.exports = {
 				return;
 			}
 			// delete photo
-			fs.unlink('public/' + student.photo, (err) => console.log(err));
+			if (student.photo != null) fs.unlink('public/' + student.photo, (err) => console.log(err));
 			// set flash message
 			req.flash('successMessage', 'Successfully deleted student!');
 			res.json({

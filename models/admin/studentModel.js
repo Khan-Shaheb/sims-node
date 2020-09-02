@@ -2,30 +2,30 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const studentSchema = new Schema({
-	SFirstName: {
+	student_first_name: {
 		type: String,
 		required: true,
 	},
-	SLastName: {
+	student_last_name: {
 		type: String,
 		required: true,
 	},
 	gender: {
 		type: String,
 	},
-	SDob: {
+	student_dob: {
 		type: String,
 	},
 	religion: {
 		type: String,
 	},
-	SMobile: {
+	student_mobile: {
 		type: Number,
 	},
-	SAddress: {
+	student_address: {
 		type: String,
 	},
-	SEmail: {
+	student_email: {
 		type: String,
 	},
 	blood: {
@@ -52,11 +52,11 @@ const studentSchema = new Schema({
 		ref: 'session',
 		required: true,
 	},
-	regNo: {
+	registration_no: {
 		type: String,
 		required: true,
 	},
-	rollNo: {
+	roll_no: {
 		type: Number,
 		required: true,
 	},
@@ -64,28 +64,28 @@ const studentSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'department',
 	},
-	admissionNo: {
+	admission_no: {
 		type: String,
 	},
-	PFirstName: {
-		type: String,
-		required: true,
-	},
-	PLastName: {
+	parent_first_name: {
 		type: String,
 		required: true,
 	},
-	PMobile: {
+	parent_last_name: {
+		type: String,
+		required: true,
+	},
+	parent_mobile: {
 		type: Number,
 		required: true,
 	},
-	occupation: {
+	parent_occupation: {
 		type: String,
 	},
-	PEmail: {
+	parent_email: {
 		type: String,
 	},
-	PAddress: {
+	parent_address: {
 		type: String,
 	},
 });

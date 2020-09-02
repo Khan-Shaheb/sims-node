@@ -15,17 +15,17 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<table
-								id="example2"
+								id="dataTable"
 								class="table table-bordered table-hover dataTable dtr-inline"
 								role="grid"
-								aria-describedby="example2_info"
+								aria-describedby="teacher_info"
 							>
 								<thead>
 									<tr role="row">
 										<th
 											class="sorting"
 											tabindex="0"
-											aria-controls="example2"
+											aria-controls="dataTable"
 										>
 											ID
 										</th>
@@ -33,21 +33,21 @@
 										<th
 											class="sorting_desc"
 											tabindex="0"
-											aria-controls="example2"
+											aria-controls="dataTable"
 										>
 											Full Name
 										</th>
 										<th
-											class="sorting_desc"
+											class="sorting"
 											tabindex="0"
-											aria-controls="example2"
+											aria-controls="dataTable"
 										>
 											Email
 										</th>
 										<th
 											class="sorting"
 											tabindex="0"
-											aria-controls="example2"
+											aria-controls="dataTable"
 										>
 											Action
 										</th>
@@ -55,23 +55,23 @@
 								</thead>
 								<tbody>
 									{{#each teachers}}
-									<tr role="row" class="odd">
-										<td class="" tabindex="0">1</td>
-										<td class="sorting_1 text-center">
+								    <tr role="row" class="odd">
+										<td  tabindex="0">1</td>
+										<td class="text-center">
 											<img class="img-circle my-circle-img"
 												src="{{photo}}"
 												alt=""
 											/>
 										</td>
-										<td class="sorting_1 text-center">
-											{{ fullName }}
+										<td class="text-center sorting_1">
+											{{ full_name }}
 										</td>
-										<td class="sorting_1 text-center">
+										<td class="text-center">
 											{{ email }}
 										</td>
 										<td class="text-center">
                                             <button
-                                            data-id="{{_id}}" onclick="showUpdateModal(this, 'teacher')"
+                                            data-id="{{_id}}" onclick="teacherUpdateModal(this, 'teacher')"
 												data-toggle="modal"
 												data-target="#update"
 												class="btn btn-info btn-small"
@@ -79,7 +79,7 @@
 												Edit
 											</button>
                                             <button
-                                                data-id="{{_id}}" onclick="showDeleteModal(this)"
+                                                data-id="{{_id}}" onclick="deleteModalHandler(this)"
 												data-toggle="modal"
 												data-target="#delete"
 												class="btn btn-danger btn-small"
@@ -87,7 +87,7 @@
 												Delete
 											</button>
                                             <button
-                                                data-id="{{_id}}" onclick="showDetailsModal(this, 'teacher')"
+                                                data-id="{{_id}}" onclick="teacherDetailsModal(this, 'teacher')"
 												data-toggle="modal"
 												data-target="#details"
 												class="btn btn-primary btn-small"
@@ -101,66 +101,7 @@
 							</table>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-sm-12 col-md-5">
-							<div
-								class="dataTables_info"
-								id="example2_info"
-								role="status"
-								aria-live="polite"
-							>
-								Showing 1 to 10 of 57 entries
-							</div>
-						</div>
-						<div class="col-sm-12 col-md-7">
-							<div
-								class="dataTables_paginate paging_simple_numbers"
-								id="example2_paginate"
-							>
-								<ul class="pagination">
-									<li
-										class="paginate_button page-item previous disabled"
-										id="example2_previous"
-									>
-										<a
-											href="#"
-											aria-controls="example2"
-											data-dt-idx="0"
-											tabindex="0"
-											class="page-link"
-											>Previous</a
-										>
-									</li>
-									<li
-										class="paginate_button page-item active"
-									>
-										<a
-											href="#"
-											aria-controls="example2"
-											data-dt-idx="1"
-											tabindex="0"
-											class="page-link"
-											>1</a
-										>
-									</li>
-
-									<li
-										class="paginate_button page-item next disabled"
-										id="example2_next"
-									>
-										<a
-											href="#"
-											aria-controls="example2"
-											data-dt-idx="7"
-											tabindex="0"
-											class="page-link"
-											>Next</a
-										>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
+					
 				</div>
 			</div>
 			<!-- /.card-body -->
@@ -183,7 +124,7 @@
                 <Do>Are you sure? Do you want to delete this Record?</p>
             </div>
             <div class="modal-footer justify-content-between">
-                <button onclick="deleteSingleItem(this, 'teacher')" style="width: 100%;" type="button"
+                <button onclick="deleteItemHandler(this, 'teacher')" style="width: 100%;" type="button"
                     class="btn btn-light deleteBtn">Delete</button>
             </div>
         </div>
@@ -209,12 +150,12 @@
                                 <label for="gender" class="col-form-label">Full Name <sup>*</sup>
                                 </label>
                     
-                                <input type="text" class="form-control updateInputField" id="fullName" name="fullName" placeholder="Enter Full Name"
+                                <input type="text" class="form-control updateInputField" id="full_name" name="full_name" placeholder="Enter Full Name"
                                     />
                     
-                                {{#if session.errors.fullName}}
+                                {{#if session.errors.full_name}}
                                     <p class="error">
-                                        {{ session.errors.fullName.msg }}
+                                        {{ session.errors.full_name.msg }}
                                     </p>
                                 {{/if}}
                             </div>
@@ -282,11 +223,11 @@
                             <div class="form-group">
                                 <label for="gender" class="col-form-label">Gender</label>
                     
-                                <select class="form-control updateInputField select2" name="gender" id="gender">
+                                <select class="form-control updateInputField" name="gender" id="gender">
                                     
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="other">Other</option>
+                                    <option value="male" {{selected 'male' session.matchedValue.gender}}>Male</option>
+                                    <option value="female" {{selected 'female' session.matchedValue.gender}}>Female</option>
+                                    <option value="other" {{selected 'other' session.matchedValue.gender}}>Other</option>
                                 </select>
                                
                             </div>
@@ -300,8 +241,8 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="joinDate" class="col-form-label">Joining Date</label>
-                                <input type="text" class="form-control inputDate updateInputField" id="joinDate" name="joinDate"
+                                <label for="joining_date" class="col-form-label">Joining Date</label>
+                                <input type="text" class="form-control inputDate updateInputField" id="joining_date" name="joining_date"
                                      />
                                 
                             </div>
@@ -369,11 +310,11 @@
             </div>
             <div class="modal-body">
                 <div class="img-wrap text-center mb-2">
-                    <img class="img-circle teacher-details-img" src="https://via.placeholder.com/150" alt="">
+                    <img class="img-circle details-modal-img" src="https://via.placeholder.com/150" alt="">
                 </div>
                 <div class="details-info">
                     <h4 class="mb-3">Teacher Information</h4>
-                    <table class="table table-bordered details-table">
+                    <table class="table table-bordered details-modal-table">
                         <tbody>
                             <tr>
                                 <td>Full Name</td>

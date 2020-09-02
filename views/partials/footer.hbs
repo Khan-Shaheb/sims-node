@@ -36,119 +36,6 @@
 <!-- AdminLTE App -->
 <script src="/dist/js/adminlte.min.js"></script>
 
-<script>
-    async function showUpdateModal(updateModalBtn, url) {
-        const id = updateModalBtn.dataset.id;
-        // console.log(`ID = ${id}`)
-        try {
-            let { data: editModelData } = await axios.get(`/${url}/${id}`);
-            console.dir(editModelData);
-            const modalInputs = document.querySelectorAll('.updateInputField');
-            
-            console.dir(modalInputs);
-            modalInputs.forEach(input => {
-                if (input.nodeName.toLowerCase() == 'select') {
-                    Array.from(input.children).forEach(select => {
-                        if (select.value.toLowerCase() == editModelData[input.name].toLowerCase()) {
-                            select.selected = true;
-                            // console.log('Selected')
-                        }
-                    })
-                }
-               
-                input.value = editModelData[input.name];
-            })
-
-            if (url == 'class') {
-                let { data: sections } = await axios.get('/section/get-all-section-list');
-
-                const sectionCheckBoxWrap = document.querySelector('.section-checkbox-edit-wrap');
-                let html = '';
-                sections.forEach(section => {
-                    html += `<div class="form-check d-inline section-checkbox">
-                                <input class="form-check-input" type="checkbox" ${checkBox(section.name)} name="section" id="section" value="${section._id}">
-                                <label class="form-check-label">${section.name}</label>
-                            </div>`
-                })
-                sectionCheckBoxWrap.innerHTML = html;
-                function checkBox(name) {
-                    const sectionsArray = editModelData.section.map(section => section.name);
-                    if (sectionsArray.includes(name)) { return "checked" } else {
-                        return "";
-                    };
-                }
-            }
-
-            if (url == 'teacher') {
-                let { data: depts } = await axios.get('/department/get-all-dept-list');
-               
-                const deptEditWrap = document.querySelector('.dept-edit-wrap');
-                let html = '';
-                depts.forEach(dept => {
-                    html += `<option value="${dept._id}" ${selected(dept.name)}>
-                              ${dept.name}
-                            </option>`
-                })
-                deptEditWrap.innerHTML = html;
-                function selected(name) {
-                    const selectedDeptName = editModelData.dept.name;
-                    const deptNames = depts.map(dept => dept.name)
-                    if (deptNames.includes(selectedDeptName)) { return "selected" } else {
-                        return "";
-                    };
-                }
-            }
-
-
-
-        } catch (err) {
-            console.log(err)
-        }
-    }
-    
-    async function showDetailsModal(detailsModalBtn, url) {
-        const id = detailsModalBtn.dataset.id;
-        try {
-            // Ajax call 
-            let { data: detailsModalData } = await axios.get(`/${url}/${id}`);
-            // console.dir(detailsModalData);
-            // convert object to array
-            const teacherDetails = Object.entries(detailsModalData);
-            // console.dir(teacherDetails);
-            // Selector 
-            const detailsTable =  document.querySelector('.details-table');
-            const detailsModalTitle = document.querySelector('.details-modal-title')
-           document.querySelector('.teacher-details-img').src = detailsModalData.photo;
-            
-            // create data row
-            let html = 
-            `<tbody>`;
-                teacherDetails.forEach(row => {
-                    if(row[0]== '_id' || row[0] == '__v' || row[1] == '' || row[0] == 'createdAt' || row[0] == 'photo') return;
-                    if(row[0] == 'dept') {
-                        html += `<tr><td>${row[0].charAt(0).toUpperCase() + row[0].slice(1)}</td><td>${row[1].name}</td></tr>`;
-                        return;
-                    }
-                    if(row[0] == 'fullName') detailsModalTitle.innerHTML = `${row[1]} Profile`;
-                    
-                    html+= `<tr><td>${row[0].charAt(0).toUpperCase() + row[0].slice(1)}</td><td>${row[1]}</td></tr>`;
-                });
-                html += `</tbody`;
-            // insert data row
-             detailsTable.innerHTML = html;
-        } catch(error) {
-            console.log(error)
-        }
-    }
-
-    function showDeleteModal(deleteModalBtn) {
-        const id = deleteModalBtn.dataset.id;
-        document.querySelector(".deleteBtn").dataset.id = id;
-    }
-
-   
-
-</script>
 
 
 <script>
@@ -161,7 +48,7 @@
             minYear: 1901,
             maxYear: parseInt(moment().format('YYYY'), 10)
         });
-        
+
         // bs custom file input 
         bsCustomFileInput.init();
 
@@ -171,7 +58,7 @@
         }, 2000)
 
         // init data table
-        $("#dataTable").DataTable({
+        $(".dataTable").DataTable({
             "responsive": true,
             "autoWidth": false,
         });
@@ -199,7 +86,7 @@
                     required: true,
                     email: true,
                 },
-                
+
                 password: {
                     required: true,
                     minlength: 4
@@ -207,19 +94,19 @@
                 name: {
                     required: true
                 },
-                fullName: {
+                full_name: {
                     required: true
                 },
-                SFirstName: {
+                student_first_name: {
                     required: true
                 },
-                SLastName: {
+                student_last_name: {
                     required: true
                 },
-                PFirstName: {
+                parent_first_name: {
                     required: true
                 },
-                PLastName: {
+                parent_last_name: {
                     required: true
                 },
                 address: {
@@ -228,8 +115,8 @@
                 phone: {
                     required: true
                 },
-              
-                PMobile: {
+
+                parent_mobile: {
                     required: true
                 },
                 class: {
@@ -241,16 +128,16 @@
                 session: {
                     required: true
                 },
-                rollNo: {
+                roll_no: {
                     required: true
                 },
-                regNo: {
+                registration_no: {
                     required: true
                 },
                 dob: {
                     required: true
                 },
-               
+
 
             },
             messages: {
@@ -258,28 +145,28 @@
                     required: "Please enter a email address",
                     email: "Please enter a valid email address"
                 },
-              
+
                 password: {
                     required: "Please provide a password",
                     minlength: "Your password must be at least 5 characters long"
                 },
-                
+
                 name: "Please input filed",
-                fullName: "Please enter your full name",
+                full_name: "Please enter your full name",
                 firstName: 'Please enter first name',
                 lastName: 'Please enter last name',
-                PFirstName: 'Please enter first name',
-                PLastName: 'Please enter last name',
+                parent_first_name: 'Please enter first name',
+                parent_last_name: 'Please enter last name',
                 address: 'Please enter address',
                 phone: 'Please enter phone number',
-                PMobile: 'Please enter mobile number',
+                parent_mobile: 'Please enter mobile number',
                 class: 'Please Select Class',
                 section: 'Please Select Section',
                 session: 'Please Select Session',
-                rollNo: 'Please Select Roll Number',
-                regNo: 'Please Enter Registration No',
+                roll_no: 'Please Select Roll Number',
+                registration_no: 'Please Enter Registration No',
                 dob: 'Please Select Date of Birth',
-                
+
 
             },
             errorElement: 'span',
@@ -291,7 +178,7 @@
                 $(element).addClass('is-invalid');
                 // if($(element).hasClass('select2')) {
                 //     $(element.nextSibling).addClass('is-invalid')
-                    
+
                 // }
             },
             unhighlight: function (element, errorClass, validClass) {
@@ -308,7 +195,7 @@
     });
 </script>
 
-<script src="/js/main.js"></script>
+<script defer src="/js/main.js"></script>
 
 
 

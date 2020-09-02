@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-
 const teacherSchema = new Schema({
-	fullName: {
+	full_name: {
 		type: String,
 		required: true,
 	},
@@ -31,7 +30,7 @@ const teacherSchema = new Schema({
 	dob: {
 		type: String,
 	},
-	joinDate: {
+	joining_date: {
 		type: String,
 	},
 	religion: {
@@ -49,7 +48,5 @@ const teacherSchema = new Schema({
 		default: Date.now(),
 	},
 });
-
-
 
 module.exports = mongoose.model('teacher', teacherSchema);

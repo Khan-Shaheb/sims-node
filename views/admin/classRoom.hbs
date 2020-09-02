@@ -71,7 +71,7 @@
                                                     <button onclick="showUpdateModal(this, 'classroom')"
                                                         data-id="{{_id}}" data-toggle="modal" data-target="#update"
                                                         class="btn btn-primary btn-small">Edit</button>
-                                                    <button onclick="showDeleteModal(this, 'classroom')"
+                                                    <button onclick="deleteModalHandler(this, 'classroom')"
                                                         data-id="{{_id}}" data-toggle="modal" data-target="#delete"
                                                         class="btn btn-danger btn-small">Delete</button>
                                                 </td>
@@ -128,7 +128,7 @@
                 <Do>Are you sure? Do you want to delete this Record?</p>
             </div>
             <div class="modal-footer justify-content-between">
-                <button onclick="deleteSingleItem(this, 'classroom')" style="width: 100%;" type="button"
+                <button onclick="deleteItemHandler(this, 'classroom')" style="width: 100%;" type="button"
                     class="btn btn-light deleteBtn">Delete</button>
             </div>
         </div>

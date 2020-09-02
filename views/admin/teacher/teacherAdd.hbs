@@ -20,15 +20,15 @@
 								<input
 									type="text"
 									class="form-control"
-									id="fullName"
-									name="fullName"
+									id="full_name"
+									name="full_name"
 									placeholder="Enter Full Name"
-									value="{{ session.matchedValue.fullName }}"
+									value="{{ session.matchedValue.full_name }}"
 								/>
 
-								{{#if session.errors.fullName}}
+								{{#if session.errors.full_name}}
 								<p class="error">
-									{{ session.errors.fullName.msg }}
+									{{ session.errors.full_name.msg }}
 								</p>
 								{{/if}}
 							</div>
@@ -185,15 +185,15 @@
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="joinDate" class="col-form-label"
+								<label for="joining_date" class="col-form-label"
 									>Joining Date</label
 								>
 								<input
 									type="text"
 									class="form-control inputDate"
-									id="joinDate"
-									name="joinDate"
-									value="{{ session.matchedValue.joinDate }}"
+									id="joining_date"
+									name="joining_date"
+									value="{{ session.matchedValue.joining_date }}"
 								/>
 								
 							</div>
