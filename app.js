@@ -22,7 +22,6 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-
 // config method override
 app.use(methodOverride('_method'));
 
@@ -54,7 +53,7 @@ app.engine(
 
 // ALl Router
 const dashboardRouter = require('./routes/admin/dashboardRouter');
-const profile = require('./routes/admin/profileRouter');
+const admin = require('./routes/admin/adminRouter');
 const classRoom = require('./routes/admin/classRoomRouter');
 const classRouter = require('./routes/admin/classRouter');
 const subject = require('./routes/admin/subjectRouter');
@@ -63,9 +62,13 @@ const student = require('./routes/admin/studentRouter');
 const section = require('./routes/admin/sectionRouter');
 const department = require('./routes/admin/deptRouter');
 const academicYear = require('./routes/admin/sessionRouter');
+const grade = require('./routes/admin/gradeRoute');
+const exam = require('./routes/admin/examRouter');
+const mark = require('./routes/admin/markRoute');
+const attendance = require('./routes/admin/attendanceRoute');
 
 app.use('/', dashboardRouter);
-app.use('/profile', profile);
+app.use('/admin', admin);
 app.use('/classroom', classRoom);
 app.use('/class', classRouter);
 app.use('/subject', subject);
@@ -74,6 +77,10 @@ app.use('/student', student);
 app.use('/section', section);
 app.use('/department', department);
 app.use('/session', academicYear);
+app.use('/grade', grade);
+app.use('/exam', exam);
+app.use('/mark', mark);
+app.use('/attendance', attendance);
 
 const port = process.env.PORT || 3000;
 // Listen Port

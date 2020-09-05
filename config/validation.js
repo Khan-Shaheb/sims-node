@@ -57,7 +57,7 @@ const teacherValidate = (req, res, next) => {
 	res.redirect(req.originalUrl);
 	return;
 };
-
+// student
 const studentValidationRules = () => {
 	return [
 		body('student_first_name').trim().notEmpty().withMessage('First Name is Required!').escape(),
@@ -95,7 +95,7 @@ const studentValidationRules = () => {
 		body('student_address').trim().escape(),
 		body('remarks').trim().escape(),
 		body('admission_no').trim().escape(),
-		body('group').trim().escape(),
+		body('dept').trim().escape(),
 		body('parent_email').trim().escape(),
 		body('parent_address').trim().escape(),
 		body('parent_occupation').trim().escape(),
@@ -103,6 +103,141 @@ const studentValidationRules = () => {
 };
 
 const studentValidate = (req, res, next) => {
+	const errors = validationResult(req);
+	const matchedValue = matchedData(req);
+
+	console.dir(matchedValue);
+	console.dir(errors);
+
+	if (errors.isEmpty()) {
+		req.session.success = true;
+		req.session.matchedValue = matchedValue;
+		return next();
+	}
+
+	req.session.errors = errors.mapped();
+	req.session.matchedValue = matchedValue;
+	req.session.success = false;
+	// if js disable then we need it
+	res.redirect(req.originalUrl);
+	return;
+};
+
+// class
+const classValidationRules = () => {
+	return [
+		body('class_name').trim().notEmpty().withMessage('Class Name is Required!').escape(),
+		body('sections').notEmpty().withMessage('Please select at least one section!'),
+	];
+};
+
+const classValidate = (req, res, next) => {
+	const errors = validationResult(req);
+	const matchedValue = matchedData(req);
+
+	// console.dir(matchedValue);
+	// console.dir(errors);
+
+	if (errors.isEmpty()) {
+		req.session.success = true;
+		req.session.matchedValue = matchedValue;
+		return next();
+	}
+
+	req.session.errors = errors.mapped();
+	req.session.matchedValue = matchedValue;
+	req.session.success = false;
+	// if js disable then we need it
+	res.redirect(req.originalUrl);
+	return;
+};
+
+// Session
+const sessionValidationRules = () => {
+	return [body('session_name').trim().notEmpty().withMessage('Session Name is Required!').escape()];
+};
+
+const sessionValidate = (req, res, next) => {
+	const errors = validationResult(req);
+	const matchedValue = matchedData(req);
+
+	// console.dir(matchedValue);
+	// console.dir(errors);
+
+	if (errors.isEmpty()) {
+		req.session.success = true;
+		req.session.matchedValue = matchedValue;
+		return next();
+	}
+
+	req.session.errors = errors.mapped();
+	req.session.matchedValue = matchedValue;
+	req.session.success = false;
+	// if js disable then we need it
+	res.redirect(req.originalUrl);
+	return;
+};
+// section
+const sectionValidationRules = () => {
+	return [body('section_name').trim().notEmpty().withMessage('Section Name is Required!').escape()];
+};
+
+const sectionValidate = (req, res, next) => {
+	const errors = validationResult(req);
+	const matchedValue = matchedData(req);
+
+	// console.dir(matchedValue);
+	// console.dir(errors);
+
+	if (errors.isEmpty()) {
+		req.session.success = true;
+		req.session.matchedValue = matchedValue;
+		return next();
+	}
+
+	req.session.errors = errors.mapped();
+	req.session.matchedValue = matchedValue;
+	req.session.success = false;
+	// if js disable then we need it
+	res.redirect(req.originalUrl);
+	return;
+};
+
+// Dept
+const deptValidationRules = () => {
+	return [body('dept_name').trim().notEmpty().withMessage('Department Name is Required!').escape()];
+};
+
+const deptValidate = (req, res, next) => {
+	const errors = validationResult(req);
+	const matchedValue = matchedData(req);
+
+	// console.dir(matchedValue);
+	// console.dir(errors);
+
+	if (errors.isEmpty()) {
+		req.session.success = true;
+		req.session.matchedValue = matchedValue;
+		return next();
+	}
+
+	req.session.errors = errors.mapped();
+	req.session.matchedValue = matchedValue;
+	req.session.success = false;
+	// if js disable then we need it
+	res.redirect(req.originalUrl);
+	return;
+};
+
+// Subject
+const subjectValidationRules = () => {
+	return [
+		body('subject_name').trim().notEmpty().withMessage('Subject Name is Required!').escape(),
+		body('class').notEmpty().withMessage('Class is Required!'),
+	];
+};
+
+const subjectValidate = (req, res, next) => {
 	const errors = validationResult(req);
 	const matchedValue = matchedData(req);
 
@@ -126,4 +261,9 @@ const studentValidate = (req, res, next) => {
 module.exports = {
 	teacher: { teacherValidationRules, teacherValidate },
 	student: { studentValidationRules, studentValidate },
+	_class: { classValidationRules, classValidate },
+	session: { sessionValidationRules, sessionValidate },
+	dept: { deptValidationRules, deptValidate },
+	subject: { subjectValidationRules, subjectValidate },
+	section: { sectionValidationRules, sectionValidate },
 };

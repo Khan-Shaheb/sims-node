@@ -8,16 +8,16 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form role="form" class="form" novalidate method="POST" action="/subject">
+            <form role="form" class="form my-form" novalidate method="POST" action="/subject">
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="name">Class</label>
+                        <label for="class">Class</label>
                         <select name="class" id="class" class="form-control select2 notSelect">
 
                             {{#if classes}}
                                 <option selected="selected" value="notSelect">Select A Class</option>
                                 {{#each classes}}
-                                    <option value="{{_id}}">{{name}}</option>
+                                    <option value="{{_id}}">{{class_name}}</option>
                                 {{/each}}
                             {{else}}
                                 <option>First Add Class</option>
@@ -26,8 +26,8 @@
 
                     </div>
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter subject name">
+                        <label for="subject_name">Name</label>
+                        <input type="text" class="form-control" id="subject_name" name="subject_name" placeholder="Enter subject name">
 
                     </div>
                     <div class="form-group">
@@ -75,12 +75,12 @@
                                                 <td class="" tabindex="0">{{incrementOne @index}}</td>
                                                 <td class="sorting_1">
                                                     {{#if class}}
-                                                        {{class.name}}
+                                                        {{class.class_name}}
                                                     {{else}}
                                                         You deleted class
                                                     {{/if}}
                                                 </td>
-                                                <td class="sorting_1">{{name}}</td>
+                                                <td class="sorting_1">{{subject_name}}</td>
                                                 <td>
                                                     <button data-id="{{_id}}" onclick="showUpdateModal(this, 'subject')"
                                                         data-toggle="modal" data-target="#update"
@@ -139,14 +139,14 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form role="form" class="form updateForm update-form" method="POST" action="/subject?_method=PUT">
+            <form role="form" class="form updateForm" method="POST" action="/subject?_method=PUT">
                 <div class="modal-body">
                     <!-- form start -->
                     <div class="form-group">
-                        <label for="updateName">Name</label>
-                        <input type="text" class="form-control updateNameInp updateInputField" name="name"
-                            id="updateName" placeholder="Enter subject name">
-                    </div>
+                        <label for="subject_name">Name</label>
+                        <input type="text" class="form-control updateInputField" name="subject_name"
+                            id="subject_name" placeholder="Enter subject name">
+                    </div> 
                     <input type="hidden" name="_id" class="hiddenId updateInputField">
                 </div>
                 <div class="modal-footer justify-content-between">

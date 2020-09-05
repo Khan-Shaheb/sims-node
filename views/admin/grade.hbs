@@ -1,19 +1,31 @@
-{{> contentHeader page="Department"}}
+{{> contentHeader page="Grade"}}
 {{> messages}}
 <div class="row">
     <div class="col-6">
         <div class="card card-info">
             <div class="card-header">
-                <h3 class="card-title">Add Department/Group</h3>
+                <h3 class="card-title">Add Grade</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form role="form" class="form my-form" method="POST" action="/department">
+            <form role="form" class="form my-form" method="POST" action="/grade">
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="dept_name">Name</label>
-                        <input type="text" class="form-control" id="dept_name" name="dept_name"
-                            placeholder="Enter Department Name">
+                        <label for="grade">Grade Name</label>
+                        <input type="text" class="form-control" id="grade" name="grade"
+                            placeholder="Enter Grade">
+                    </div>
+                    <div class="form-group">
+                        <label for="point">Grade Point</label>
+                        <input type="number" class="form-control" id="point" name="point" placeholder="Grade Point" max="5" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="mark_from">Mark From</label>
+                        <input type="number" class="form-control" id="mark_from" name="mark_from" placeholder="Mark From" min="0" max="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="mark_upto">Mark Upto</label>
+                        <input type="number" class="form-control" id="mark_upto" name="mark_upto" placeholder="Mark Upto" min="0" max="100">
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-info form-submit">Create</button>
@@ -28,7 +40,7 @@
     <div class="col-6">
         <div class="card card-info">
             <div class="card-header ">
-                <h3 class="card-title">All Department/Group</h3>
+                <h3 class="card-title">All Grade</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -46,25 +58,31 @@
                                     role="grid" aria-describedby="example2_info">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting" tabindex="0" aria-controls="example2">ID</th>
-                                            <th class="sorting_desc" tabindex="0" aria-controls="example2">Name</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2">
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable">ID</th>
+                                            <th class="sorting_desc" tabindex="0" aria-controls="dataTable">Grade</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable">Grade Point</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable">Grade From</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable">Grade Upto</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable">
                                                 Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
-                                        {{#each departments}}
+                                        {{#each grades}}
                                             <tr role="row" class="odd">
-                                                <td class="" tabindex="0">{{incrementOne @index}}</td>
-                                                <td class="sorting_1">{{dept_name}}</td>
+                                                <td>{{incrementOne @index}}</td>
+                                                <td class="sorting_1" tabindex="0">{{grade}}</td>
+                                                <td>{{point}}</td>
+                                                <td>{{mark_from}}</td>
+                                                <td>{{mark_upto}}</td>
                                                 <td>
                                                     <button data-id="{{_id}}"
-                                                        onclick="showUpdateModal(this, 'department')"
+                                                        onclick="showUpdateModal(this, 'grade')"
                                                         data-toggle="modal" data-target="#update"
                                                         class="btn btn-primary btn-small">Edit</button>
                                                     <button data-id="{{_id}}"
-                                                        onclick="deleteModalHandler(this, 'department')"
+                                                        onclick="deleteModalHandler(this, 'grade')"
                                                         data-toggle="modal" data-target="#delete"
                                                         class="btn btn-danger btn-small">Delete</button>
                                                 </td>
@@ -92,7 +110,7 @@
     <div class="modal-dialog">
         <div class="modal-content bg-danger">
             <div class="modal-header">
-                <h4 class="modal-title">Delete department</h4>
+                <h4 class="modal-title">Delete grade</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -101,7 +119,7 @@
                 <Do>Are you sure? Do you want to delete this Record?</p>
             </div>
             <div class="modal-footer justify-content-between">
-                <button onclick="deleteItemHandler(this, 'department')" style="width: 100%;" type="button"
+                <button onclick="deleteItemHandler(this, 'grade')" style="width: 100%;" type="button"
                     class="btn btn-light deleteBtn">Delete</button>
             </div>
         </div>
@@ -109,22 +127,34 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-<div class="modal fade " id="update" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="update" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content bg-info">
             <div class="modal-header">
-                <h4 class="modal-title">Edit Department</h4>
+                <h4 class="modal-title">Edit Grade</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form role="form" method="POST" class="updateForm" action="/department?_method=PUT">
+            <form role="form" method="POST" class="form updateForm" action="/grade?_method=PUT">
                 <div class="modal-body">
                     <!-- form start -->
                     <div class="form-group">
-                        <label for="dept_name">Name</label>
-                        <input type="text" class="form-control updateInputField" name="dept_name" id="dept_name"
-                            placeholder="Enter Department name">
+                        <label for="grade">Name</label>
+                        <input type="text" class="form-control updateNameInp updateInputField" name="grade" id="grade"
+                            placeholder="Enter Grade name">
+                    </div>
+                    <div class="form-group">
+                        <label for="point">Grade Point</label>
+                        <input type="number" class="form-control updateInputField" id="point" name="point" placeholder="Grade Point" max="5" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="mark_from">Mark From</label>
+                        <input type="number" class="form-control updateInputField" id="mark_from" name="mark_from" placeholder="Mark From" min="0" max="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="mark_upto">Mark Upto</label>
+                        <input type="number" class="form-control updateInputField" id="mark_upto" name="mark_upto" placeholder="Mark Upto" min="0" max="100">
                     </div>
                     <input type="hidden" name="_id" class="hiddenId updateInputField">
                 </div>

@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const classSchema = new Schema({
-	name: {
+	class_name: {
 		type: String,
 		required: true,
 	},
-	section: [{ type: Schema.Types.ObjectId, ref: 'section' }],
+	sections: [{ type: Schema.Types.ObjectId, ref: 'section', required: true }],
 	createdAt: {
 		type: Date,
 		default: Date.now(),

@@ -1,0 +1,260 @@
+{{> contentHeader page="Manage Attendance"}}
+<div class="row">
+	<div class="col-6">
+		<div class="alert alert-success alert-dismissible fade hide" role="alert" style="display: none">
+			<span></span>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-12">
+		<div class="card card-info">
+			<div class="card-header">
+				<h3 class="card-title">Student Attendance</h3>
+			</div>
+			<!-- /.card-header -->
+			<!-- form start -->
+
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-2 offset-1">
+						<div class="form-group">
+							<label for="_class">Select Class </label>
+							<select name="_class" class="form-control select2" id="_class" required>
+								{{#if classes}}
+								<!-- <option value="">Select A Class</option> -->
+								{{#selected2 session.matchedValue._class}}
+								{{#each classes}}
+								<option value="{{ _id }}">{{ class_name }}</option>
+								{{/each}}
+								{{/selected2}}
+								{{else}}
+								<option value="">Please 1st Add Class</option>
+								{{/if}}
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="form-group">
+							<label for="section">Select Section </label>
+							<select name="section" class="form-control select2" id="section" required>
+								{{#if sections}}
+								<!-- <option value="">Select A Section</option> -->
+								{{#selected2 session.matchedValue.section}}
+								{{#each sections}}
+								<option value="{{ _id }}">{{ section_name }}</option>
+								{{/each}}
+								{{/selected2}}
+								{{else}}
+								<option value="">Please 1st Add Section</option>
+								{{/if}}
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="form-group">
+							<label for="subject">Select Subject </label>
+							<select name="subject" class="form-control select2" id="subject" required>
+								{{#if subjects}}
+								<!-- <option value="">Select A Subject</option> -->
+								{{#selected2 session.matchedValue.subject}}
+								{{#each subjects}}
+								<option value="{{ _id }}">{{ subject_name }}</option>
+								{{/each}}
+								{{/selected2}}
+								{{else}}
+								<option value="">Please 1st Add Subject</option>
+								{{/if}}
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="form-group">
+							<label for="attendance_date">Select Subject </label>
+							<input
+								type="text"
+								class="form-control inputDate"
+								name="attendance_date"
+								id="attendance_date"
+							/>
+						</div>
+					</div>
+
+					<div class="col-sm-2">
+						<div class="form-group">
+							<label for="" class="hidden">""</label>
+							<button class="btn btn-info form-control" onclick="attendanceHandler(this)">
+								Attendance
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-12">
+		<div class="card card-info">
+			<div class="card-header">
+				<h3 class="card-title">Student Attendance List</h3>
+			</div>
+			<!-- /.card-header -->
+			<div class="card-body">
+				{{#if error}}
+				{{ error }}
+				{{else}}
+				<div id="example2_wrapper">
+					<div class="row">
+						<div class="col-sm-12">
+							<table
+								class="table table-bordered table-hover"
+								role="grid"
+								aria-describedby="example2_info"
+							>
+								<thead>
+									<tr role="row">
+										<th>ID</th>
+										<th>Photo</th>
+										<th>Name</th>
+										<th>Roll</th>
+										<th>Attendance</th>
+									</tr>
+								</thead>
+								<tbody class="attendances-table-body"></tbody>
+							</table>
+						</div>
+						<div class="col-sm-12 text-right">
+							<button class="btn btn-info submit-attendance">Submit</button>
+						</div>
+					</div>
+				</div>
+				{{/if}}
+			</div>
+			<!-- /.card-body -->
+		</div>
+		<!-- /.card -->
+	</div>
+	<!-- /.col -->
+</div>
+
+<script>
+	let classValue = null;
+	let sectionValue = null;
+	let subjectValue = null;
+	let attendanceDate = null;
+	async function attendanceHandler(that) {
+		classValue = document.querySelector('#_class').value;
+		sectionValue = document.querySelector('#section').value;
+		subjectValue = document.querySelector('#subject').value;
+		attendanceDate = document.querySelector('#attendance_date').value;
+
+		// console.log(classValue, sectionValue, subjectValue, attendanceDate);
+		const attendancesTableBody = document.querySelector('.attendances-table-body');
+		let students = [];
+		try {
+			if (classValue && sectionValue) {
+				const result = await axios.get(`/student/${classValue}/${sectionValue}/`);
+				students = result.data;
+			}
+		} catch (error) {
+			console.log(error);
+		}
+
+		let attendances;
+		try {
+			if (classValue && sectionValue && subjectValue && attendanceDate) {
+				const result = await axios.get(
+					`/attendance/${classValue}/${sectionValue}/${subjectValue}/${attendanceDate}`
+				);
+				attendances = result.data;
+			}
+		} catch (error) {
+			attendances = null;
+		}
+		// console.log(attendances);
+		let html = '';
+		students.forEach(
+			(student, index) =>
+				(html += `
+	                                           <tr role="row">
+	                                               <td>${index + 1}</td>
+	                                               <td><img src="${student.photo}"/></td>
+	                                               <td tabindex="0">${
+														student.student_first_name + ' ' + student.student_last_name
+													}</td>
+	                                               <td>${student.roll_no}</td>
+	                                                 <td>
+	                                                   <div class="form-group">
+	                                                       <div class="form-check d-inline">
+	                                                           <input class="attendance form-check-input" ${isChecked(
+																	attendances,
+																	student.roll_no,
+																	'P'
+																)} type="radio" value="P" name="attendance${
+					student.roll_no
+				}">
+	                                                           <label class="form-check-label">Present</label>
+	                                                       </div>
+	                                                       <div class="form-check d-inline">
+	                                                           <input class="attendance form-check-input" ${isChecked(
+																	attendances,
+																	student.roll_no,
+																	'LP'
+																)} type="radio" value="LP" name="attendance${
+					student.roll_no
+				}">
+	                                                           <label class="form-check-label">Late Present</label>
+	                                                       </div>
+	                                                       <div class="form-check d-inline">
+	                                                           <input class="attendance form-check-input" ${isChecked(
+																	attendances,
+																	student.roll_no,
+																	'A'
+																)} type="radio" value="A" name="attendance${
+					student.roll_no
+				}">
+	                                                           <label class="form-check-label">Absent</label>
+	                                                       </div>
+	                                                        </div>
+	                                                   </td>
+	                                           </tr>`)
+		);
+		attendancesTableBody.innerHTML = html;
+		function isChecked(attendances, roll, inputValue) {
+			if (!attendances) return '';
+			if (attendances['attendance' + roll] == inputValue) return 'checked';
+		}
+	}
+	document.querySelector('.submit-attendance').addEventListener('click', async (e) => {
+		const attendances = document.querySelectorAll('.attendance');
+		// console.log(attendances);
+		let attendance = {};
+		attendances.forEach((el) => {
+			const name = el.name;
+			const checked = document.querySelector(`input[name="${name}"]:checked`);
+			if (checked) attendance[name] = checked.value;
+			else attendance[name] = 'A';
+		});
+		try {
+			const { data } = await axios.post('/attendance/create', {
+				_class: classValue,
+				section: sectionValue,
+				subject: subjectValue,
+				date: attendanceDate,
+				attendance,
+			});
+			const flashMessage = document.querySelector('.alert-success');
+			document.querySelector('.alert-success > span').innerText = data.message;
+			flashMessage.classList.remove('hide');
+			flashMessage.classList.add('show');
+			flashMessage.style.display = 'block';
+		} catch (error) {
+			console.log(error);
+		}
+	});
+</script>

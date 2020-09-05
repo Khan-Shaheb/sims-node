@@ -8,18 +8,18 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form role="form" method="POST" action="/class" novalidate="novalidate" class="form">
+            <form role="form" method="POST" action="/class" class="form my-form">
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" name="name" id="name" placeholder="Enter class name">
+                        <label for="class_name">Name</label>
+                        <input type="text" class="form-control" name="class_name" id="class_name" value="{{ session.matchedValue.class_name }}" placeholder="Enter class name">
                     </div>
                     <div class="form-group">
                         <label for="name">Section: </label>
                         {{#each sections}}
                             <div class="form-check d-inline section-checkbox">
-                                <input class="form-check-input" type="checkbox" name="section" value="{{_id}}">
-                                <label class="form-check-label">{{name}}</label>
+                                <input class="form-check-input" type="checkbox" name="sections" value="{{_id}}">
+                                <label class="form-check-label">{{section_name}}</label>
                             </div>
 
                         {{/each}}
@@ -66,12 +66,12 @@
                                         {{#each classes}}
                                             <tr role="row" class="odd">
                                                 <td class="sorting_1" tabindex="0">{{incrementOne @index}}</td>
-                                                <td>{{name}}</td>
+                                                <td>{{class_name}}</td>
                                                 <td>
-                                                    {{#if section}}
+                                                    {{#if sections}}
                                                         <ul>
-                                                            {{#each section}}
-                                                                <li>{{name}}</li>
+                                                            {{#each sections}}
+                                                                <li>{{section_name}}</li>
                                                             {{/each}}
                                                         </ul>
                                                     {{else}}
@@ -133,12 +133,12 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form role="form" method="POST" action="/class?_method=PUT" novalidate="novalidate" class="updateForm">
+            <form role="form" method="POST" action="/class?_method=PUT" class="updateForm">
                 <div class="modal-body">
                     <!-- form start -->
                     <div class="form-group">
-                        <label for="updateName">Name</label>
-                        <input type="text" class="form-control updateInputField" name="name" id="updateName"
+                        <label for="class_name">Name</label>
+                        <input type="text" class="form-control updateInputField" name="class_name" id="class_name"
                             placeholder="Enter class name">
                     </div>
                     <div class="form-group">
@@ -146,8 +146,6 @@
                         <div class="section-checkbox-edit-wrap">
 
                         </div>
-
-
                     </div>
                     <input type="hidden" name="_id" class="hiddenId updateInputField">
                 </div>

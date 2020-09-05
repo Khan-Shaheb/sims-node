@@ -60,7 +60,7 @@ const studentSchema = new Schema({
 		type: Number,
 		required: true,
 	},
-	group: {
+	dept: {
 		type: Schema.Types.ObjectId,
 		ref: 'department',
 	},

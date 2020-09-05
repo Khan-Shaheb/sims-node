@@ -24,24 +24,31 @@ img#photo2 {
 .updateForm .form-group:last-child {
 	margin-bottom: 0 !important;
 }
-.teacher-modal-dialog  {
+.teacher-modal-dialog {
 	max-width: 800px;
 }
 .student-modal-dialog {
-    max-width: 1000px;
+	max-width: 1000px;
 }
 .my-circle-img {
-    min-width: 150px;
-    min-height: 150px;
-    background-color: #ddd;
+	min-width: 150px;
+	min-height: 150px;
+	background-color: #ddd;
 }
 
 .table td {
-    vertical-align: middle;
+	vertical-align: middle;
 }
 sup {
-    color: red
+	color: red;
 }
-.is-invalid{
-    border: 1px solid red
+.is-invalid {
+	border: 1px solid red;
+}
+.hidden {
+	visibility: hidden;
+	opacity: 0;
+}
+.attendances-table-body img {
+	width: 40px;
 }

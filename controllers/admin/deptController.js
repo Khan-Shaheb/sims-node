@@ -7,7 +7,7 @@ module.exports = {
 
 			if (departments.length == 0) {
 				return res.render('admin/department', {
-					error: 'No department added! Please add subject',
+					error: 'No department added! Please add department',
 					departments,
 				});
 			}
@@ -53,15 +53,15 @@ module.exports = {
 		}
 	},
 	department_update: async (req, res) => {
-		let { _id, name } = req.body;
-		name = name.trim();
+		let { _id, dept_name } = req.body;
+		dept_name = dept_name.trim();
 		try {
 			const department = await Department.findById(_id);
 			if (department == null) {
 				req.flash('errorMessage', 'No department found for Edit!');
 				return res.redirect('/department');
 			}
-			if (name) department.name = name;
+			if (dept_name) department.dept_name = dept_name;
 			await department.save();
 			req.flash('successMessage', `Successfully edited department`);
 			res.status(302).redirect('/department');
@@ -84,9 +84,7 @@ module.exports = {
 	},
 	department_index_list: async (req, res) => {
 		try {
-			const departments = await Department.find()
-				.lean()
-				.sort({ name: 'asc' });
+			const departments = await Department.find().lean().sort({ dept_name: 'asc' });
 
 			if (departments.length == 0) {
 				return res.status(404).json(departments);

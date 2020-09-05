@@ -1,27 +1,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const adminSchema = new Schema({
-	firstName: {
+const examSchema = new Schema({
+	exam_name: {
 		type: String,
 		required: true,
 	},
-	lastName: {
-		type: String,
-	},
-	phone: {
-		type: String,
-	},
-	email: {
+	starting_date: {
 		type: String,
 		required: true,
 	},
-	password: {
+	ending_date: {
 		type: String,
 		required: true,
-	},
-	photo: {
-		type: String,
 	},
 	createdAt: {
 		type: Date,
@@ -29,4 +20,4 @@ const adminSchema = new Schema({
 	},
 });
 
-module.exports = mongoose.model('admin', adminSchema);
+module.exports = mongoose.model('exam', examSchema);

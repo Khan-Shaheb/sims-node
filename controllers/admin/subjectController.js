@@ -5,7 +5,7 @@ module.exports = {
 	subject_index: async (req, res) => {
 		try {
 			const subjects = await Subject.find().populate('class').lean();
-			const classes = await Class.find().lean().sort({ name: 'asc' });
+			const classes = await Class.find().lean().sort({ class_name: 'desc' });
 			if (subjects.length == 0) {
 				return res.render('admin/subject', {
 					error: 'No subject added! Please add subject',
@@ -18,6 +18,20 @@ module.exports = {
 			res.status(500).render('error/500');
 		}
 	},
+	subject_list_of_class: async (req, res) => {
+		const id = req.params.id;
+		try {
+			const subjects = await Subject.find({ class: id }).lean();
+			if (subjects.length == 0) {
+				return res.json(subjects);
+			}
+			res.json(subjects);
+		} catch (err) {
+			console.log(err);
+			res.status(500).render('error/500');
+		}
+	},
+
 	subject_details: async (req, res) => {
 		const id = req.params.id;
 		try {
@@ -48,15 +62,15 @@ module.exports = {
 		}
 	},
 	subject_update: async (req, res) => {
-		let { _id, name } = req.body;
-		name = name.trim();
+		let { _id, subject_name } = req.body;
+		subject_name = subject_name.trim();
 		try {
 			const subject = await Subject.findById(_id);
 			if (subject == null) {
 				req.flash('errorMessage', 'No Subject found for Edit!');
 				return res.redirect('/subject');
 			}
-			if (name) subject.name = name;
+			if (name) subject.subject_name = subject_name;
 			await subject.save();
 			req.flash('successMessage', `Successfully edited subject`);
 			res.status(302).redirect('/subject');
@@ -67,7 +81,6 @@ module.exports = {
 	},
 	subject_create: async (req, res) => {
 		let subject = new Subject(req.body);
-
 		try {
 			subject = await subject.save();
 			req.flash('successMessage', `Successfully added subject`);

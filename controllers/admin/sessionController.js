@@ -2,7 +2,7 @@ const Session = require('../../models/admin/sessionModel');
 module.exports = {
 	session_index: async (req, res) => {
 		try {
-			const sessions = await Session.find().sort({ name: 'asc' }).lean();
+			const sessions = await Session.find().sort({ session_name: 'asc' }).lean();
 			if (sessions.length == 0) {
 				return res.render('admin/session', {
 					error: 'No session added! Please add session',
@@ -29,14 +29,14 @@ module.exports = {
 		}
 	},
 	session_update: async (req, res) => {
-		const { _id, name } = req.body;
+		const { _id, session_name } = req.body;
 		try {
 			const session = await Session.findById(_id);
 			if (session == null) {
 				req.flash('errorMessage', 'No session found for Edit!');
 				return res.redirect('/session');
 			}
-			session.name = name;
+			session.session_name = session_name;
 			await session.save();
 			req.flash('successMessage', `Successfully edited session`);
 			res.status(302).redirect('/session');
@@ -62,7 +62,7 @@ module.exports = {
 	},
 	session_create: async (req, res) => {
 		let session = new Session({
-			name: req.body.name,
+			session_name: req.body.session_name,
 		});
 		try {
 			session = await session.save();
@@ -75,7 +75,7 @@ module.exports = {
 	},
 	session_index_list: async (req, res) => {
 		try {
-			const sessions = await Session.find().lean().sort({ name: 'asc' });
+			const sessions = await Session.find().lean().sort({ session_name: 'asc' });
 
 			if (sessions.length == 0) {
 				return res.status(404).json(sessions);

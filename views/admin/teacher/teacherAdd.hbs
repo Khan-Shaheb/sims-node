@@ -96,8 +96,8 @@
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="dept" class="col-form-label"
-									>Select dept</label
+								<label for="dept_name" class="col-form-label"
+									>Select dept_name</label
 								>
 
 								<select
@@ -106,7 +106,7 @@
 									id="dept"
                                 >
 									{{#each dept}}
-                                        <option value="{{_id}}" {{selected _id session.matchedValue.dept}}>{{name}}</option>
+                                        <option value="{{_id}}" {{selected _id session.matchedValue.dept_name}}>{{dept_name}}</option>
                                     {{/each}}
 								</select>
 								

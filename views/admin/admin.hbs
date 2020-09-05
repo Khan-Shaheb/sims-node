@@ -1,0 +1,356 @@
+{{> contentHeader page="admin" subPage="All admin"}}
+{{> messages}}
+<div class="row">
+    <div class="col-8">
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title">Add Admin</h3>
+            </div>
+            <form role="form" method="POST" class="my-form form-horizontal" action="/admin"
+                enctype="multipart/form-data">
+                <div class="card-body">
+                <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="first_name" class="col-form-label">First Name <sup>*</sup>
+                                </label>
+            
+                                <input type="text" class="form-control" id="first_name" name="first_name"
+                                    placeholder="Enter First Name" value="{{ session.matchedValue.first_name }}" />
+            
+                                {{#if session.errors.first_name}}
+                                    <p class="error">
+                                        {{ session.errors.first_name.msg }}
+                                    </p>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="last_name" class="col-form-label">Last Name <sup>*</sup>
+                                </label>
+            
+                                <input type="text" class="form-control" id="last_name" name="last_name"
+                                    placeholder="Enter First Name" value="{{ session.matchedValue.last_name }}" />
+            
+                                {{#if session.errors.last_name}}
+                                    <p class="error">
+                                        {{ session.errors.last_name.msg }}
+                                    </p>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="email" class="col-form-label">Email<sup>*</sup></label>
+            
+                                <input type="text" class="form-control" id="email" name="email"
+                                    placeholder="Enter Your Email" value="{{ session.matchedValue.email }}"  />
+                                {{#if session.errors.email}}
+                                    <p class="error">
+                                        {{ session.errors.email.msg }}
+                                    </p>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="password" class="col-form-label">Password<sup>*</sup></label>
+            
+                                <input type="text" class="form-control" id="password" name="password"
+                                    placeholder="Enter Your Password" value="{{ session.matchedValue.password }}"  />
+                                {{#if session.errors.password}}
+                                    <p class="error">
+                                        {{ session.errors.password.msg }}
+                                    </p>
+                                {{/if}}
+                            </div>
+                        </div>
+            
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="phone" class="col-form-label">Phone Number<sup>*</sup></label>
+            
+                                <input type="text" class="form-control" id="phone" name="phone"
+                                    placeholder="Enter Phone Number" value="{{ session.matchedValue.phone }}" />
+                                {{#if session.errors.phone}}
+                                    <p class="error">
+                                        {{ session.errors.phone.msg }}
+                                    </p>
+                                {{/if}}
+                            </div>
+                        </div>
+            
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="photo">Photo</label>
+                                <div class="input-group" style="margin-top: 5px">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input " id="photo" name="photo" />
+                                        <label class="custom-file-label photo-custom-file" for="photo">
+                                            Choose Photo
+                                        </label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="">Upload</span>
+                                    </div>
+                                </div>
+            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-info form-submit">Create</button>
+                            </div>
+                            </div>
+                    </div> 
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-8">
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title">All admin</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="dataTable" class="table table-bordered table-hover dataTable dtr-inline"
+                                role="grid" aria-describedby="admin_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable">
+                                            ID
+                                        </th>
+                                        <th>Photo</th>
+                                        <th class="sorting_desc" tabindex="0" aria-controls="dataTable">
+                                            Full Name
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable">
+                                            Email
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each admins}}
+                                        <tr role="row" class="odd">
+                                            <td tabindex="0">1</td>
+                                            <td class="text-center">
+                                                <img class="img-circle my-circle-img" src="{{photo}}" alt="" />
+                                            </td>
+                                            <td class="text-center sorting_1">
+                                                {{ first_name }} {{ last_name }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ email }}
+                                            </td>
+                                            <td class="text-center">
+                                                <button data-id="{{_id}}" onclick="adminUpdateModal(this, 'admin')"
+                                                    data-toggle="modal" data-target="#update"
+                                                    class="btn btn-info btn-small">
+                                                    Edit
+                                                </button>
+                                                <button data-id="{{_id}}" onclick="deleteModalHandler(this)"
+                                                    data-toggle="modal" data-target="#delete"
+                                                    class="btn btn-danger btn-small">
+                                                    Delete
+                                                </button>
+                                                <button data-id="{{_id}}" onclick="adminDetailsModal(this, 'admin')"
+                                                    data-toggle="modal" data-target="#details"
+                                                    class="btn btn-primary btn-small">
+                                                    Details
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.col -->
+</div>
+
+<div class="modal fade" id="delete" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content bg-danger">
+            <div class="modal-header">
+                <h4 class="modal-title">Delete admin</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <Do>Are you sure? Do you want to delete this Record?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button onclick="deleteItemHandler(this, 'admin')" style="width: 100%;" type="button"
+                    class="btn btn-light deleteBtn">Delete</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="update" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog admin-modal-dialog">
+        <div class="modal-content bg-info">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit admin</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form role="form" method="POST" class="updateForm my-form form-horizontal" action="/admin?_method=PUT"
+                enctype="multipart/form-data">
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="first_name" class="col-form-label">First Name <sup>*</sup>
+                                </label>
+
+                                <input type="text" class="form-control updateInputField" id="first_name" name="first_name"
+                                    placeholder="Enter First Name" />
+
+                                {{#if session.errors.first_name}}
+                                    <p class="error">
+                                        {{ session.errors.first_name.msg }}
+                                    </p>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="last_name" class="col-form-label">Last Name <sup>*</sup>
+                                </label>
+
+                                <input type="text" class="form-control updateInputField" id="last_name" name="last_name"
+                                    placeholder="Enter First Name" />
+
+                                {{#if session.errors.last_name}}
+                                    <p class="error">
+                                        {{ session.errors.last_name.msg }}
+                                    </p>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="email" class="col-form-label">Email<sup>*</sup></label>
+
+                                <input type="text" class="form-control updateInputField" id="email" name="email"
+                                    placeholder="Enter Your Email" />
+                                {{#if session.errors.email}}
+                                    <p class="error">
+                                        {{ session.errors.email.msg }}
+                                    </p>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="password" class="col-form-label">Password<sup>*</sup></label>
+
+                                <input type="text" class="form-control updateInputField" id="password" name="password"
+                                    placeholder="Enter Your Password" />
+                                {{#if session.errors.password}}
+                                    <p class="error">
+                                        {{ session.errors.password.msg }}
+                                    </p>
+                                {{/if}}
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="phone" class="col-form-label">Phone Number<sup>*</sup></label>
+
+                                <input type="text" class="form-control updateInputField" id="phone" name="phone"
+                                    placeholder="Enter Phone Number" />
+                                {{#if session.errors.phone}}
+                                    <p class="error">
+                                        {{ session.errors.phone.msg }}
+                                    </p>
+                                {{/if}}
+                            </div>
+                        </div>
+ 
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="photo">Photo</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input " id="photo" name="photo" />
+                                        <label class="custom-file-label photo-custom-file" for="photo">
+                                            Choose Photo
+                                        </label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="">Upload</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="_id" class="hiddenId updateInputField">
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button style="width: 100%;" type="submit" class="btn btn-light">Update</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="details" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content bg-info">
+            <div class="modal-header">
+                <h4 class="modal-title details-modal-title">Shajal Profile</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="img-wrap text-center mb-2">
+                    <img class="img-circle details-modal-img" src="https://via.placeholder.com/150" alt="">
+                </div>
+                <div class="details-info">
+                    <h4 class="mb-3">admin Information</h4>
+                    <table class="table table-bordered details-modal-table">
+                        <tbody>
+                            <tr>
+                                <td>Full Name</td>
+                                <td>
+                                    Shajal Kumer Sarker
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

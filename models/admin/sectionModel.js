@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const sectionSchema = new Schema({
-	name: {
+	section_name: {
 		type: String,
 		required: true,
 	},

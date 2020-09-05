@@ -23,9 +23,11 @@ const {
 	student_details,
 	student_delete,
 	student_update,
+	student_list_by_class_section,
 } = require('../../controllers/admin/studentController');
 
 router.get('/', student_index);
+router.get('/:class/:section', student_list_by_class_section);
 router.get('/create', student_create_get);
 router.post(
 	'/create',

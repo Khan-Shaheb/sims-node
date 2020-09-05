@@ -8,11 +8,16 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form role="form" class="form" method="POST" action="/section">
+            <form role="form" class="form my-form" method="POST" action="/section">
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Section Name">
+                        <label for="section_name">Name</label>
+                        <input type="text" class="form-control" value="{{ session.matchedValue.section_name }}" id="section_name" name="section_name" placeholder="Enter Section Name">
+                        {{#if session.errors.section_name}}
+                            <p class="error">
+                                {{ session.errors.section_name.msg }}
+                            </p>
+                        {{/if}}
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-info form-submit">Create</button>
@@ -56,7 +61,7 @@
                                         {{#each sections}}
                                             <tr role="row" class="odd">
                                                 <td class="" tabindex="0">{{incrementOne @index}}</td>
-                                                <td class="sorting_1">{{name}}</td>
+                                                <td class="sorting_1">{{section_name}}</td>
                                                 <td>
                                                     <button data-id="{{_id}}" onclick="showUpdateModal(this, 'section')"
                                                         data-toggle="modal" data-target="#update"
@@ -119,9 +124,9 @@
                 <div class="modal-body">
                     <!-- form start -->
                     <div class="form-group">
-                        <label for="updateName">Name</label>
-                        <input type="text" class="form-control updateNameInp updateInputField" name="name"
-                            id="updateName" placeholder="Enter Section name">
+                        <label for="section_name">Name</label>
+                        <input type="text" class="form-control updateInputField" name="section_name"
+                            id="section_name" placeholder="Enter Section name">
                     </div>
                     <input type="hidden" name="_id" class="hiddenId updateInputField">
 

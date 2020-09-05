@@ -136,18 +136,18 @@
 								>
                                     {{#if classes}}
                                         <option value="">Select Class</option>
-                                        {{#selected2 session.matchedValue.class}}
+                                        {{#selected2 session.matchedValue._class}}
                                             {{#each classes}}
-                                                <option value="{{ _id }}">{{name}}</option>
+                                                <option value="{{ _id }}">{{class_name}}</option>
                                             {{/each}}
                                         {{/selected2}}
 									{{else}}
 									<option value="">Please 1st Add Class</option>
 									{{/if}}
                                 </select>
-                                {{#if session.errors.class}}
+                                {{#if session.errors._class}}
                                     <p class="error">
-                                        {{ session.errors.class.msg }}
+                                        {{ session.errors._class.msg }}
                                     </p>
                                 {{/if}}
 							</div>
@@ -166,7 +166,7 @@
                                         <option value="">Select Section</option>
                                         {{#selected2 session.matchedValue.section}}
                                             {{#each sections}}
-                                                <option value="{{ _id }}">{{name}}</option>
+                                                <option value="{{ _id }}">{{section_name}}</option>
                                             {{/each}}
                                         {{/selected2}}
 									{{else}}
@@ -196,7 +196,7 @@
                                         <option value="">Select Session</option>
                                         {{#selected2 session.matchedValue.session}}
                                             {{#each sessions}}
-                                                <option value="{{ _id }}" >{{name}}</option>
+                                                <option value="{{ _id }}" >{{session_name}}</option>
                                             {{/each}}
                                         {{/selected2}}
 									{{else }}
@@ -258,18 +258,18 @@
 							<div class="form-group">
 								<label for="group">Select Group</label>
 								<select
-									name="group"
-									id="group"
+									name="dept"
+									id="dept"
 									class="form-control select2"
-                                    name="group"
-                                    name="group"
+                                    name="dept"
+                                    name="dept"
                                 >
                                 
-                                    {{#if groups}}
+                                    {{#if depts}}
                                         <!-- <option value="">Select Group</option> -->
-                                        {{#selected2 session.matchedValue.group}}
-                                            {{#each groups}}
-                                                <option value="{{ _id }}">{{name}}</option>
+                                        {{#selected2 session.matchedValue.dept}}
+                                            {{#each depts}}
+                                                <option value="{{ _id }}">{{dept_name}}</option>
                                             {{/each}}
                                         {{/selected2}}
                                     {{else }}

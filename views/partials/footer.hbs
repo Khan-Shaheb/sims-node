@@ -94,6 +94,12 @@
                 name: {
                     required: true
                 },
+                dept_name: {
+                    required: true
+                },
+                class_name: {
+                    required: true
+                },
                 full_name: {
                     required: true
                 },
@@ -137,6 +143,34 @@
                 dob: {
                     required: true
                 },
+                grade: {
+                    required: true
+                },
+                point: {
+                    required: true
+                },
+                mark_from: {
+                    required: true
+                },
+                mark_upto: {
+                    required: true
+                },
+                exam_name: {
+                    required: true
+                },
+                starting_date: {
+                    required: true
+                },
+                ending_date: {
+                    required: true
+                },
+                section_name: {
+                    required: true
+                },
+                session_name: {
+                    required: true
+                },
+                
 
 
             },
@@ -152,6 +186,8 @@
                 },
 
                 name: "Please input filed",
+                dept_name: "Please Enter Department Name",
+                class_name: "Please Enter Class Name!",
                 full_name: "Please enter your full name",
                 firstName: 'Please enter first name',
                 lastName: 'Please enter last name',
@@ -166,7 +202,16 @@
                 roll_no: 'Please Select Roll Number',
                 registration_no: 'Please Enter Registration No',
                 dob: 'Please Select Date of Birth',
-
+                grade: 'Please Enter Grade!',
+                point: 'Please Enter Point!',
+                mark_from: 'Please Enter Mark From!',
+                mark_upto: 'Please Enter Mark Upto!',
+                exam_name: 'Please Enter Exam Name!',
+                starting_date: 'Please Select Starting Date',
+                ending_date: 'Please Select Ending Date!',
+                section_name: "Please Enter Section Name",
+                session_name: "Please Enter Session Name",
+                
 
             },
             errorElement: 'span',
@@ -191,8 +236,91 @@
             }
         });
 
+        $('.marks-form').validate({
+            rules: {
+                 exam: {
+                     required: true
+                 },
+                 _class: {
+                     required: true
+                 },
+                 section: {
+                     required: true
+                 },
+                 subject: {
+                     required: true
+                 },
+            },
+            messages: {
+                "subject": 'Please Select Subject',
+                "_class": 'Please Select Class',
+                "section": 'Please Select Section',
+                "subject": 'Please Select Subject',
+            }
+        })
+
+        $('.updateForm').validate({
+            rules: {
+                 grade: {
+                    required: true
+                },
+                point: {
+                    required: true
+                },
+                mark_from: {
+                    required: true
+                },
+                mark_upto: {
+                    required: true
+                },
+                exam_name: {
+                    required: true
+                },
+                starting_date: {
+                    required: true
+                },
+                ending_date: {
+                    required: true
+                },
+                section: {
+                    required: true,
+                },
+                class_name: {
+                    required: true,
+                },
+                dept_name: {
+                    required: true,
+                },
+                subject_name: {
+                    required: true,
+                },
+                section_name: {
+                    required: true,
+                },
+                session_name: {
+                    required: true,
+                },
+            },
+            messages: {
+                grade: 'Please Enter Grade!',
+                point: 'Please Enter Point!',
+                mark_from: 'Please Enter Mark From!',
+                mark_upto: 'Please Enter Mark Upto!',
+                exam_name: 'Please Enter Exam Name!',
+                starting_date: 'Please Select Starting Date',
+                ending_date: 'Please Select Ending Date!',
+                section: 'Please Select Section!',
+                class_name: 'Please Enter class Name!',
+                dept_name: "Please Enter Department Name",
+                subject_name: "Please Enter Subject Name",
+                section_name: "Please Enter Section Name",
+                session_name: "Please Enter Session Name",
+            }
+        })
 
     });
+
+
 </script>
 
 <script defer src="/js/main.js"></script>

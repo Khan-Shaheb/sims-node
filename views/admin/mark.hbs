@@ -1,0 +1,256 @@
+{{> contentHeader page="Manage Marks"}}
+{{> messages}}
+<div class="row">
+	<div class="col-12">
+		<div class="card card-info">
+			<div class="card-header">
+				<h3 class="card-title">Filter Marks</h3>
+			</div>
+			<!-- /.card-header -->
+			<!-- form start -->
+
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-2 offset-1">
+						<div class="form-group">
+							<label for="exam">Select A Exam </label>
+							<select name="exam" class="form-control select2" id="exam" required>
+								{{#if exams}}
+								<option value="">Select A Exam</option>
+								{{#selected2 session.matchedValue.exams}}
+								{{#each exams}}
+								<option value="{{ _id }}">{{ exam_name }}</option>
+								{{/each}}
+								{{/selected2}}
+								{{else}}
+								<option value="">Please 1st Add exam</option>
+								{{/if}}
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="form-group">
+							<label for="_class">Select Class </label>
+							<select
+								name="_class"
+								id="_class"
+								onchange="selectSectionAndSubject(this)"
+								class="form-control mark-class-select select2"
+							>
+								{{#if classes}}
+								<option value="">Select A Class</option>
+								{{#selected2 session.matchedValue.class}}
+								{{#each classes}}
+								<option value="{{ _id }}">{{ class_name }}</option>
+								{{/each}}
+								{{/selected2}}
+								{{else}}
+								<option value="">Please 1st Add Class</option>
+								{{/if}}
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="form-group">
+							<label for="section">Select Section </label>
+							<select
+								name="section"
+								id="section"
+								class="form-control select2 mark-section-select"
+							></select>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="form-group">
+							<label for="subject">Select Subject </label>
+							<select
+								name="subject"
+								id="subject"
+								class="form-control select2 mark-subject-select"
+							></select>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="form-group">
+							<label for="" class="hidden">""</label>
+							<button class="btn btn-info form-control form-submit" onclick="markFilterHandler(this)">
+								Filter
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-12">
+		<div class="card card-info">
+			<div class="card-header">
+				<h3 class="card-title">All Marks</h3>
+			</div>
+			<!-- /.card-header -->
+			<div class="card-body">
+				{{#if error}}
+				{{ error }}
+				{{else}}
+				<div id="example2_wrapper">
+					<div class="row">
+						<div class="col-sm-12">
+							<table
+								class="table table-bordered table-hover"
+								role="grid"
+								aria-describedby="example2_info"
+							>
+								<thead>
+									<tr role="row">
+										<th>ID</th>
+										<th colspan="0">Student Name</th>
+										<th>Mark</th>
+										<th>Grade Point</th>
+										<th>Comment</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody class="marks-table-body"></tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				{{/if}}
+			</div>
+			<!-- /.card-body -->
+		</div>
+		<!-- /.card -->
+	</div>
+	<!-- /.col -->
+</div>
+
+<script>
+	// helper function or  formate function end
+	async function selectSectionAndSubject(that) {
+		const id = that.value;
+		const { data: result } = await axios.get(`/class/${id}`);
+		// console.log(result);
+		let html = '';
+		result.sections.forEach(
+			(section) => (html += `<option value="${section._id}">${section.section_name}</option> `)
+		);
+		document.querySelector('.mark-section-select').innerHTML = html;
+
+		let { data: result2 } = await axios.get(`/subject/get-all-subject-of-class/${id}`);
+		// console.log(result2);
+		html = '';
+		result2.forEach((el) => (html += `<option value="${el._id}">${el.subject_name}</option> `));
+		document.querySelector('.mark-subject-select').innerHTML = html;
+	}
+	async function markFilterHandler(that) {
+		const exam = document.querySelector('#exam').value;
+		const _class = document.querySelector('#_class').value;
+		const section = document.querySelector('#section').value;
+		const subject = document.querySelector('#subject').value;
+
+		let students = [];
+		try {
+			if (_class && section) {
+				const result = await axios.get(`/student/${_class}/${section}/`);
+				students = result.data;
+			}
+		} catch (error) {
+			console.log(error);
+		}
+		let marks = [];
+		try {
+			if (subject && _class && section) {
+				const result = await axios.get(`/mark/${_class}/${section}/${subject}`);
+				marks = result.data;
+			}
+		} catch (error) {
+			console.log(error);
+		}
+
+		let html = '';
+		students.forEach(
+			(student, index) =>
+				(html += `
+                                            <tr role="row">
+                                                <td>${index + 1}</td>
+                                                <td class="student-name-id${index}" data-id="${
+					student._id
+				}" tabindex="0">${student.student_first_name + ' ' + student.student_last_name}</td>
+                                                <td><input type="number" value="${formatMarkAndComment(
+													marks[index]
+												)}" name="id${index}"class="form-control mark-id${index}" onchange="loadGradeHandler(this)"/></td>
+                                                <td class="grade_point-id${index}">${formatGrade(marks[index])}</td>
+                                                <td><input type="text" class="form-control comment-id${index}" name="comment" value="${formatMarkAndComment(
+					marks[index]
+				)}" /></td>
+                                                <td>
+                                                    <button data-id="id${index}" onclick="updateMark(this)" class="btn btn-primary btn-small">Update</button>
+                                                </td>
+                                            </tr>`)
+		);
+		document.querySelector('.marks-table-body').innerHTML = html;
+
+		function formatMarkAndComment(value) {
+			try {
+				if (value.value) return value.value;
+			} catch (e) {
+				// console.log(e);
+				return '';
+			}
+		}
+
+		function formatGrade(grade) {
+			// console.log(grade.grade_point);
+			try {
+				if (grade.grade_point) return grade.grade_point;
+			} catch (e) {
+				// console.log(e);
+				return 'N/A';
+			}
+		}
+	}
+
+	async function loadGradeHandler(that) {
+		const mark = parseInt(that.value);
+		const { data: grades } = await axios.get(`/grade/get-all-grade-list`);
+		let grade = '';
+		for (let index = 0; index < grades.length; index++) {
+			if (mark >= grades[index].mark_from && mark <= grades[index].mark_upto) {
+				grade = grades[index].grade;
+				break;
+			} else {
+				grade = 'N/A';
+			}
+		}
+
+		document.querySelector(`.grade_point-${that.name}`).innerText = grade;
+	}
+
+	async function updateMark(that) {
+		const id = that.dataset.id;
+		const student = document.querySelector(`.student-name-${id}`).dataset.id;
+		const grade_point = document.querySelector(`.grade_point-${id}`).innerText;
+		const mark = document.querySelector(`.mark-${id}`).value;
+		const comment = document.querySelector(`.comment-${id}`).value;
+
+		const exam = document.querySelector('#exam').value;
+		const _class = document.querySelector('#_class').value;
+		const section = document.querySelector('#section').value;
+		const subject = document.querySelector('#subject').value;
+
+		const { data: grade } = await axios.put(`/mark`, {
+			student,
+			grade_point,
+			mark,
+			_class,
+			section,
+			subject,
+			exam,
+			comment,
+		});
+		console.log(grade);
+	}
+</script>

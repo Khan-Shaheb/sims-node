@@ -54,10 +54,10 @@
                                                 {{ student_first_name }} {{student_last_name}}
                                             </td>
                                             <td class="text-center">
-                                                {{ _class.name }}
+                                                {{ _class.class_name }}
                                             </td>
                                             <td class="text-center">
-                                                {{ section.name }}
+                                                {{ section.section_name }}
                                             </td>
                                             <td class="text-center">
                                                 {{ registration_no }}
@@ -247,9 +247,9 @@
                             <select name="_class" id="_class" class="form-control updateInputField class-edit-wrap">
                               
                             </select>
-                            {{#if session.errors.class}}
+                            {{#if session.errors._class}}
                                 <p class="error">
-                                    {{ session.errors.class.msg }}
+                                    {{ session.errors._class.msg }}
                                 </p>
                             {{/if}}
                         </div>
@@ -317,8 +317,8 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label for="group">Select Group</label>
-                            <select name="group" id="group" class="form-control updateInputField group-edit-wrap" name="group" name="group">
+                            <label for="dept">Select Group</label>
+                            <select name="dept" id="dept" class="form-control updateInputField dept-edit-wrap" name="dept" name="dept">
 
                             </select>
                         </div>

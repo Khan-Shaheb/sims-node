@@ -2,7 +2,7 @@ const Student = require('../../models/admin/studentModel');
 const Class = require('../../models/admin/classModel');
 const Section = require('../../models/admin/sectionModel');
 const Session = require('../../models/admin/sessionModel');
-const Group = require('../../models/admin/deptModel');
+const Dept = require('../../models/admin/deptModel');
 
 const fs = require('fs');
 
@@ -13,7 +13,7 @@ module.exports = {
 				.populate('_class')
 				.populate('section')
 				.populate('semester')
-				.populate('department')
+				.populate('dept')
 				.sort({ student_first_name: 'asc' })
 				.lean();
 
@@ -26,19 +26,35 @@ module.exports = {
 			res.status(500).render('error/500');
 		}
 	},
+	student_list_by_class_section: async (req, res) => {
+		const _class = req.params.class;
+		const section = req.params.section;
+		// console.log(_class, section);
+		try {
+			const students = await Student.find({ _class, section }).sort({ _id: 'asc' }).lean();
+			// console.log(student);
+			if (students === null) {
+				return res.status(404).json(students);
+			}
+			return res.json(students);
+		} catch (error) {
+			console.log(`${error}`);
+			res.status(404).render('error/404');
+		}
+	},
 	student_create_get: async (req, res) => {
 		try {
-			const classes = await Class.find().lean().sort({ name: 'asc' });
-			const sections = await Section.find().lean().sort({ name: 'asc' });
-			const sessions = await Session.find().lean().sort({ name: 'asc' });
-			const groups = await Group.find().lean().sort({ name: 'asc' });
-			const students = await Student.find().lean().sort({ name: 'asc' });
+			const classes = await Class.find().lean().sort({ class_name: 'asc' });
+			const sections = await Section.find().lean().sort({ section_name: 'asc' });
+			const sessions = await Session.find().lean().sort({ session_name: 'asc' });
+			const depts = await Dept.find().lean().sort({ dept_name: 'asc' });
+			const students = await Student.find().lean().sort({ student_first_name: 'asc' });
 
 			res.render('admin/student/addStudent', {
 				classes,
 				sections,
 				sessions,
-				groups,
+				depts,
 				students,
 			});
 		} catch (err) {
@@ -50,7 +66,7 @@ module.exports = {
 		const id = req.params.id;
 		try {
 			const student = await Student.findById(id)
-				.populate('group')
+				.populate('dept')
 				.populate('_class')
 				.populate('session')
 				.populate('section')
