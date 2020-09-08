@@ -25,7 +25,7 @@
 							<label for="_class">Select Class </label>
 							<select name="_class" class="form-control select2" id="_class" required>
 								{{#if classes}}
-								<!-- <option value="">Select A Class</option> -->
+								<option value="">Select A Class</option>
 								{{#selected2 session.matchedValue._class}}
 								{{#each classes}}
 								<option value="{{ _id }}">{{ class_name }}</option>
@@ -42,7 +42,7 @@
 							<label for="section">Select Section </label>
 							<select name="section" class="form-control select2" id="section" required>
 								{{#if sections}}
-								<!-- <option value="">Select A Section</option> -->
+								<option value="">Select A Section</option>
 								{{#selected2 session.matchedValue.section}}
 								{{#each sections}}
 								<option value="{{ _id }}">{{ section_name }}</option>

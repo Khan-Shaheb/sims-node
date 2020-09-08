@@ -25,6 +25,18 @@ async function teacherUpdateModal(updateModalBtn, url) {
 	insertSelectElement(editModelData, '.dept-edit-wrap', '/department/get-all-dept-list', 'dept');
 }
 
+// admin module
+
+function adminDetailsModal(detailsModalBtn, url) {
+	const id = detailsModalBtn.dataset.id;
+	getDetailsModalInfo(url, id, '.details-modal-table', '.details-modal-title', '.details-modal-img');
+}
+
+async function adminUpdateModal(updateModalBtn, url) {
+	const id = updateModalBtn.dataset.id;
+	await getUpdateDetailAndInsert(id, url);
+}
+
 // class module
 async function classUpdateModal(updateModalBtn, url) {
 	const id = updateModalBtn.dataset.id;

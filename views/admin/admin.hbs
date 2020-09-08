@@ -6,7 +6,7 @@
             <div class="card-header">
                 <h3 class="card-title">Add Admin</h3>
             </div>
-            <form role="form" method="POST" class="my-form form-horizontal" action="/admin"
+            <form role="form" method="POST" class="form my-form form-horizontal" action="/admin/create"
                 enctype="multipart/form-data">
                 <div class="card-body">
                 <div class="row">
@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="last_name" class="col-form-label">Last Name <sup>*</sup>
+                                <label for="last_name" class="col-form-label">Last Name 
                                 </label>
             
                                 <input type="text" class="form-control" id="last_name" name="last_name"
@@ -69,7 +69,7 @@
             
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="phone" class="col-form-label">Phone Number<sup>*</sup></label>
+                                <label for="phone" class="col-form-label">Phone Number <sub>*</sub></label>
             
                                 <input type="text" class="form-control" id="phone" name="phone"
                                     placeholder="Enter Phone Number" value="{{ session.matchedValue.phone }}" />
@@ -102,7 +102,7 @@
                             <div class="form-group">
                                 <button type="submit" class="btn btn-info form-submit">Create</button>
                             </div>
-                            </div>
+                        </div>
                     </div> 
                 </div>
             </form>
@@ -140,6 +140,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
                                     {{#each admins}}
                                         <tr role="row" class="odd">
                                             <td tabindex="0">1</td>
@@ -171,6 +172,8 @@
                                             </td>
                                         </tr>
                                     {{/each}}
+                                    
+                                        
                                 </tbody>
                             </table>
                         </div>
@@ -216,7 +219,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form role="form" method="POST" class="updateForm my-form form-horizontal" action="/admin?_method=PUT"
+            <form role="form" method="POST" class="updateForm form-horizontal" action="/admin?_method=PUT"
                 enctype="multipart/form-data">
                 <div class="modal-body">
 
@@ -295,7 +298,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="photo">Photo</label>
-                                <div class="input-group">
+                                <div class="input-group" style="margin-top: 5px">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input " id="photo" name="photo" />
                                         <label class="custom-file-label photo-custom-file" for="photo">
@@ -322,6 +325,7 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+
 <div class="modal fade" id="details" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content bg-info">
@@ -354,3 +358,8 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+
+
+<script>
+   
+</script>

@@ -10,6 +10,8 @@
 
 <!-- jQuery -->
 <script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Jquery UI -->
+<script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
 
 <!-- Bootstrap 4 -->
 <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -30,12 +32,20 @@
 <!-- For custom date  -->
 <script src="/plugins/moment/moment.min.js"></script>
 <script src="/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Full calendar -->
+<script src="../plugins/fullcalendar/main.min.js"></script>
+<script src="../plugins/fullcalendar-daygrid/main.min.js"></script>
+<script src="../plugins/fullcalendar-timegrid/main.min.js"></script>
+<script src="../plugins/fullcalendar-interaction/main.min.js"></script>
+<script src="../plugins/fullcalendar-bootstrap/main.min.js"></script>
+
+<!-- Page specific script -->
 
 <!-- Select2 -->
 <script src="/plugins/select2/js/select2.full.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/dist/js/adminlte.min.js"></script>
-
+<script defer src="/dist/js/calendar.js"></script>
 
 
 <script>
@@ -48,7 +58,10 @@
             minYear: 1901,
             maxYear: parseInt(moment().format('YYYY'), 10)
         });
+       
 
+        // The Calender
+         
         // bs custom file input 
         bsCustomFileInput.init();
 
@@ -86,12 +99,14 @@
                     required: true,
                     email: true,
                 },
-
                 password: {
                     required: true,
                     minlength: 4
                 },
                 name: {
+                    required: true
+                },
+                first_name: {
                     required: true
                 },
                 dept_name: {
@@ -121,7 +136,6 @@
                 phone: {
                     required: true
                 },
-
                 parent_mobile: {
                     required: true
                 },
@@ -170,6 +184,9 @@
                 session_name: {
                     required: true
                 },
+                subject_name: {
+                    required: true
+                },
                 
 
 
@@ -189,8 +206,8 @@
                 dept_name: "Please Enter Department Name",
                 class_name: "Please Enter Class Name!",
                 full_name: "Please enter your full name",
-                firstName: 'Please enter first name',
-                lastName: 'Please enter last name',
+                first_name: 'Please enter first name',
+                last_name: 'Please enter last name',
                 parent_first_name: 'Please enter first name',
                 parent_last_name: 'Please enter last name',
                 address: 'Please enter address',
@@ -211,7 +228,7 @@
                 ending_date: 'Please Select Ending Date!',
                 section_name: "Please Enter Section Name",
                 session_name: "Please Enter Session Name",
-                
+                subject_name: "Please Enter Subject Name",
 
             },
             errorElement: 'span',
@@ -221,18 +238,10 @@
             },
             highlight: function (element, errorClass, validClass) {
                 $(element).addClass('is-invalid');
-                // if($(element).hasClass('select2')) {
-                //     $(element.nextSibling).addClass('is-invalid')
-
-                // }
+               
             },
             unhighlight: function (element, errorClass, validClass) {
                 $(element).removeClass('is-invalid');
-                // if ($(element).hasClass('select2')) {
-                //     console.log(element);
-                //     $(element.nextSibling).removeClass('is-invalid')
-
-                // }
             }
         });
 
@@ -300,6 +309,18 @@
                 session_name: {
                     required: true,
                 },
+                first_name :{
+                    required: true
+                },
+                password: {
+                    required: true
+                },
+                phone: {
+                    required: true
+                },
+                email: {
+                    required: true
+                }
             },
             messages: {
                 grade: 'Please Enter Grade!',
@@ -315,6 +336,10 @@
                 subject_name: "Please Enter Subject Name",
                 section_name: "Please Enter Section Name",
                 session_name: "Please Enter Session Name",
+                first_name: "First Name can not be empty",
+                email: "Email can not be empty",
+                phone: "Phone can not be empty",
+                password: "Password can not be empty",
             }
         })
 
@@ -323,7 +348,7 @@
 
 </script>
 
-<script defer src="/js/main.js"></script>
+<script defer src="/dist/js/main.js"></script>
 
 
 

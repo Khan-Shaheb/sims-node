@@ -8,19 +8,20 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form role="form" class="form my-form" novalidate method="POST" action="/subject">
+            <form role="form" class="form my-form" method="POST" action="/subject">
                 <div class="card-body">
                     <div class="form-group">
                         <label for="class">Class</label>
-                        <select name="class" id="class" class="form-control select2 notSelect">
-
+                        <select name="class" id="class" class="form-control">
                             {{#if classes}}
-                                <option selected="selected" value="notSelect">Select A Class</option>
-                                {{#each classes}}
-                                    <option value="{{_id}}">{{class_name}}</option>
-                                {{/each}}
+                                <option value="">Select Class</option>
+                                {{#selected2 session.matchedValue._class}}
+                                    {{#each classes}}
+                                        <option value="{{ _id }}">{{class_name}}</option>
+                                    {{/each}}
+                                {{/selected2}}
                             {{else}}
-                                <option>First Add Class</option>
+                                <option value="">Please 1st Add Class</option>
                             {{/if}}
                         </select>
 
@@ -28,7 +29,6 @@
                     <div class="form-group">
                         <label for="subject_name">Name</label>
                         <input type="text" class="form-control" id="subject_name" name="subject_name" placeholder="Enter subject name">
-
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-info form-submit">Create</button>
@@ -145,7 +145,7 @@
                     <div class="form-group">
                         <label for="subject_name">Name</label>
                         <input type="text" class="form-control updateInputField" name="subject_name"
-                            id="subject_name" placeholder="Enter subject name">
+                            placeholder="Enter subject name">
                     </div> 
                     <input type="hidden" name="_id" class="hiddenId updateInputField">
                 </div>
