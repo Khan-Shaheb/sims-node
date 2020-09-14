@@ -45,7 +45,8 @@ module.exports = {
 				attendance.attendance = req.body.attendance;
 
 				await attendance.save();
-				// req.flash('successMessage', `Successfully Updated attendance`);
+				req.flash('successMessage', `Successfully Updated attendance`);
+				// res.redirect('/attendance');
 				res.json({ attendance: attendance, message: 'Successfully Updated attendance' });
 				return;
 			}

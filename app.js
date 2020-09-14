@@ -66,6 +66,7 @@ const grade = require('./routes/admin/gradeRoute');
 const exam = require('./routes/admin/examRouter');
 const mark = require('./routes/admin/markRoute');
 const attendance = require('./routes/admin/attendanceRoute');
+const login = require('./routes/loginRouter');
 
 app.use('/', dashboardRouter);
 app.use('/admin', admin);
@@ -81,6 +82,11 @@ app.use('/grade', grade);
 app.use('/exam', exam);
 app.use('/mark', mark);
 app.use('/attendance', attendance);
+app.use('/login', login);
+
+app.get('*', (req, res) => {
+	res.render('error/404');
+});
 
 const port = process.env.PORT || 3000;
 // Listen Port

@@ -186,3 +186,7 @@ function findSelected(editModelData, value, inputName) {
 	if (value == editModelData[inputName][inputName + '_name']) return 'selected';
 	else return '';
 }
+
+document.querySelector('.logout').addEventListener('click', async (e) => {
+	window.location.href = '/login';
+});
