@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"sims.grades"}],"uuid":"6e51f7c745b94e26b4aff6ae222a99e7"}
