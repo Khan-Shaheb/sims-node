@@ -3,9 +3,9 @@
 3.  Then run "npm start". After running this server will be running on port 3000
 4.  Open your browser and go to "localhost:3000"
 
-            PASSWORD
+            #PASSWORD
 
-========================================
+==============================
 Admin username: admin@gmail.com
 Admin Password: 1234
 
