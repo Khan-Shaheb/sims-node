@@ -1,162 +1,167 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-	<!-- Brand Logo -->
+    <!-- Brand Logo -->
 
-	<a href="/" class="brand-link">
-		<img
-			src="/dist/img/AdminLTELogo.png"
-			alt="AdminLTE Logo"
-			class="brand-image img-circle elevation-3"
-			style="opacity: 0.8"
-		/>
-		<span class="brand-text font-weight-light">SIMS</span>
-	</a>
+    <a href="/" class="brand-link">
+        <img src="/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            style="opacity: 0.8" />
+        <span class="brand-text font-weight-light">SIMS</span>
+    </a>
 
-	<!-- Sidebar -->
-	<div class="sidebar">
-		<!-- Sidebar user panel (optional) -->
-		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-			<div class="image">
-				<img src="/dist/img/me.jpg" class="img-circle elevation-2" alt="User Image" />
-			</div>
-			<div class="info">
-				<a href="/" class="d-block">Shajal Kumer</a>
-			</div>
-		</div>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="/dist/img/me.jpg" class="img-circle elevation-2" alt="User Image" />
+            </div>
+            <div class="info">
+                <a href="/" class="d-block">Shajal Kumer</a>
+            </div>
+        </div>
 
-		<!-- Sidebar Menu -->
-		<nav class="mt-2">
-			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-				<!-- Add icons to the links using the .nav-icon class
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-				<li class="nav-item">
-					<a href="/" class="nav-link">
-						<i class="nav-icon fa fa-tachometer-alt"></i>
-						Dashboard
-					</a>
-				</li>
-				<li class="nav-item">
-					<a href="/admin" class="nav-link">
-						<i class="nav-icon fa fa-flag"></i>
-						Admin
-					</a>
-				</li>
+                <li class="nav-item">
+                    <a href="/" class="nav-link">
+                        <i class="nav-icon fa fa-tachometer-alt"></i>
+                        Dashboard
+                    </a>
+                </li>
+                {{#if session.isAdmin}}
+                    <li class="nav-item">
+                        <a href="/admin" class="nav-link">
+                            <i class="nav-icon fa fa-flag"></i>
+                            Admin
+                        </a>
+                    </li>
 
-				<li class="nav-item">
-					<a href="/class" class="nav-link">
-						<i class="nav-icon fa fa-database"></i>
-						Class/Course
-					</a>
-				</li>
-				<li class="nav-item">
-					<a href="/section" class="nav-link">
-						<i class="nav-icon fa fa-list-ul"></i>
-						Section
-					</a>
-				</li>
-				<li class="nav-item">
-					<a href="/subject" class="nav-link">
-						<i class="nav-icon fa fa-book"></i>
-						Subject
-					</a>
-				</li>
-				<li class="nav-item">
-					<a href="/department" class="nav-link">
-						<i class="nav-icon fas fa-building"></i>
-						Department/ Group
-					</a>
-				</li>
-				<li class="nav-item">
-					<a href="/session" class="nav-link">
-						<i class="nav-icon fas fa-calendar-check"></i>
-						Session
-					</a>
-				</li>
-				<li class="nav-item">
-					<a href="#" class="nav-link">
-						<i class="nav-icon fas fa-check"></i>
-						<p>
-							Exam
-							<i class="right fas fa-angle-left"></i>
-						</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="/mark" class="nav-link active">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Marks</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="/exam" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Exam</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="/grade" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Grade</p>
-							</a>
-						</li>
-					</ul>
-				</li>
+                    <li class="nav-item">
+                        <a href="/class" class="nav-link">
+                            <i class="nav-icon fa fa-database"></i>
+                            Class/Course
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/section" class="nav-link">
+                            <i class="nav-icon fa fa-list-ul"></i>
+                            Section
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/subject" class="nav-link">
+                            <i class="nav-icon fa fa-book"></i>
+                            Subject
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/department" class="nav-link">
+                            <i class="nav-icon fas fa-building"></i>
+                            Department/ Group
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/session" class="nav-link">
+                            <i class="nav-icon fas fa-calendar-check"></i>
+                            Session
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>
+                                Teacher
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
 
-				<li class="nav-item">
-					<a href="/attendance" class="nav-link">
-						<i class="nav-icon fa fa-chart-pie"></i>
-						Attendance
-					</a>
-				</li>
-				<li class="nav-item">
-					<a href="#" class="nav-link">
-						<i class="nav-icon fas fa-user"></i>
-						<p>
-							Teacher
-							<i class="right fas fa-angle-left"></i>
-						</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="/teacher/create" class="nav-link active">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Add Teacher</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="/teacher" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
-								<p>All Teacher</p>
-							</a>
-						</li>
-					</ul>
-				</li>
-				<li class="nav-item">
-					<a href="#" class="nav-link">
-						<i class="nav-icon fas fa-graduation-cap"></i>
-						<p>
-							Student
-							<i class="right fas fa-angle-left"></i>
-						</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="/student/create" class="nav-link active">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Add Student</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="/student" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
-								<p>All Student</p>
-							</a>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</nav>
-		<!-- /.sidebar-menu -->
-	</div>
-	<!-- /.sidebar -->
+                            <li class="nav-item">
+                                <a href="/teacher/create" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Add Teacher</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/teacher" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>All Teacher</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                {{/if}}
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-check"></i>
+                        <p>
+                            Exam
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/mark" class="nav-link active">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Marks</p>
+                            </a>
+                        </li>
+                        {{#if session.isAdmin}}
+                            <li class="nav-item">
+                                <a href="/exam" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Exam</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/grade" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Grade</p>
+                                </a>
+                            </li>
+                        {{/if}}
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/attendance" class="nav-link">
+                        <i class="nav-icon fa fa-chart-pie"></i>
+                        Attendance
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-graduation-cap"></i>
+                        <p>
+                            Student
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        {{#if session.isAdmin}}
+                            <li class="nav-item">
+                                <a href="/student/create" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Add Student</p>
+                                </a>
+                            </li>
+                        {{/if}}
+                        <li class="nav-item">
+                            <a href="/student" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>All Student</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
 </aside>

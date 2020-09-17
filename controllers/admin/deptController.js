@@ -84,7 +84,10 @@ module.exports = {
 	},
 	department_index_list: async (req, res) => {
 		try {
-			const departments = await Department.find().lean().sort({ dept_name: 'asc' });
+			const departments = await Department.find()
+				.lean()
+				.sort({ dept_name: 'asc' });
+			console.log(departments);
 
 			if (departments.length == 0) {
 				return res.status(404).json(departments);

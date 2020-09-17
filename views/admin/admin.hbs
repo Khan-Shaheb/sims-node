@@ -9,15 +9,15 @@
             <form role="form" method="POST" class=" my-form form-horizontal" action="/admin/create"
                 enctype="multipart/form-data">
                 <div class="card-body">
-                <div class="row">
+                    <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="first_name" class="col-form-label">First Name <sup>*</sup>
                                 </label>
-            
+
                                 <input type="text" class="form-control" id="first_name" name="first_name"
                                     placeholder="Enter First Name" value="{{ session.matchedValue.first_name }}" />
-            
+
                                 {{#if session.errors.first_name}}
                                     <p class="error">
                                         {{ session.errors.first_name.msg }}
@@ -27,12 +27,12 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="last_name" class="col-form-label">Last Name 
+                                <label for="last_name" class="col-form-label">Last Name
                                 </label>
-            
+
                                 <input type="text" class="form-control" id="last_name" name="last_name"
                                     placeholder="Enter First Name" value="{{ session.matchedValue.last_name }}" />
-            
+
                                 {{#if session.errors.last_name}}
                                     <p class="error">
                                         {{ session.errors.last_name.msg }}
@@ -43,9 +43,9 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="email" class="col-form-label">Email<sup>*</sup></label>
-            
+
                                 <input type="text" class="form-control" id="email" name="email"
-                                    placeholder="Enter Your Email" value="{{ session.matchedValue.email }}"  />
+                                    placeholder="Enter Your Email" value="{{ session.matchedValue.email }}" />
                                 {{#if session.errors.email}}
                                     <p class="error">
                                         {{ session.errors.email.msg }}
@@ -56,9 +56,9 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="password" class="col-form-label">Password<sup>*</sup></label>
-            
+
                                 <input type="text" class="form-control" id="password" name="password"
-                                    placeholder="Enter Your Password" value="{{ session.matchedValue.password }}"  />
+                                    placeholder="Enter Your Password" value="{{ session.matchedValue.password }}" />
                                 {{#if session.errors.password}}
                                     <p class="error">
                                         {{ session.errors.password.msg }}
@@ -66,11 +66,11 @@
                                 {{/if}}
                             </div>
                         </div>
-            
+
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="phone" class="col-form-label">Phone Number <sub>*</sub></label>
-            
+
                                 <input type="text" class="form-control" id="phone" name="phone"
                                     placeholder="Enter Phone Number" value="{{ session.matchedValue.phone }}" />
                                 {{#if session.errors.phone}}
@@ -80,7 +80,7 @@
                                 {{/if}}
                             </div>
                         </div>
-            
+
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="photo">Photo</label>
@@ -95,7 +95,7 @@
                                         <span class="input-group-text" id="">Upload</span>
                                     </div>
                                 </div>
-            
+
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -103,7 +103,7 @@
                                 <button type="submit" class="btn btn-info form-submit">Create</button>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </form>
         </div>
@@ -140,7 +140,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                     {{#each admins}}
                                         <tr role="row" class="odd">
                                             <td tabindex="0">1</td>
@@ -172,8 +172,8 @@
                                             </td>
                                         </tr>
                                     {{/each}}
-                                    
-                                        
+
+
                                 </tbody>
                             </table>
                         </div>
@@ -229,8 +229,8 @@
                                 <label for="first_name" class="col-form-label">First Name <sup>*</sup>
                                 </label>
 
-                                <input type="text" class="form-control updateInputField" id="first_name" name="first_name"
-                                    placeholder="Enter First Name" />
+                                <input type="text" class="form-control updateInputField" id="first_name"
+                                    name="first_name" placeholder="Enter First Name" />
 
                                 {{#if session.errors.first_name}}
                                     <p class="error">
@@ -280,7 +280,7 @@
                                 {{/if}}
                             </div>
                         </div>
-                        
+
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="phone" class="col-form-label">Phone Number<sup>*</sup></label>
@@ -294,7 +294,7 @@
                                 {{/if}}
                             </div>
                         </div>
- 
+
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="photo">Photo</label>
@@ -330,7 +330,7 @@
     <div class="modal-dialog">
         <div class="modal-content bg-info">
             <div class="modal-header">
-                <h4 class="modal-title details-modal-title">Shajal Profile</h4>
+                <h4 class="modal-title details-modal-title">Shawdesh Profile</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -361,5 +361,5 @@
 
 
 <script>
-   
+
 </script>

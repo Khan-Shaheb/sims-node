@@ -2,34 +2,77 @@
 async function studentUpdateModal(updateModalBtn, url) {
 	const id = updateModalBtn.dataset.id;
 	let editModelData = await getUpdateDetailAndInsert(id, url);
-	insertSelectElement(editModelData, '.class-edit-wrap', '/class/get-all-class-list', 'class');
-	insertSelectElement(editModelData, '.section-edit-wrap', '/section/get-all-section-list', 'section');
-	insertSelectElement(editModelData, '.session-edit-wrap', '/session/get-all-session-list', 'session');
-	insertSelectElement(editModelData, '.dept-edit-wrap', '/department/get-all-dept-list', 'dept');
+	insertSelectElement(
+		editModelData,
+		'.class-edit-wrap',
+		'/class/get-all-class-list',
+		'class'
+	);
+	insertSelectElement(
+		editModelData,
+		'.section-edit-wrap',
+		'/section/get-all-section-list',
+		'section'
+	);
+	insertSelectElement(
+		editModelData,
+		'.session-edit-wrap',
+		'/session/get-all-session-list',
+		'session'
+	);
+	insertSelectElement(
+		editModelData,
+		'.dept-edit-wrap',
+		'/department/get-all-dept-list',
+		'dept'
+	);
 }
 
 async function studentDetailsModal(detailsModalBtn, url) {
 	const id = detailsModalBtn.dataset.id;
-	getDetailsModalInfo(url, id, '.details-modal-table', '.details-modal-title', '.details-modal-img');
+	getDetailsModalInfo(
+		url,
+		id,
+		'.details-modal-table',
+		'.details-modal-title',
+		'.details-modal-img'
+	);
 }
 
 // Teacher module
 function teacherDetailsModal(detailsModalBtn, url) {
 	const id = detailsModalBtn.dataset.id;
-	getDetailsModalInfo(url, id, '.details-modal-table', '.details-modal-title', '.details-modal-img');
+	getDetailsModalInfo(
+		url,
+		id,
+		'.details-modal-table',
+		'.details-modal-title',
+		'.details-modal-img'
+	);
 }
 
 async function teacherUpdateModal(updateModalBtn, url) {
 	const id = updateModalBtn.dataset.id;
 	let editModelData = await getUpdateDetailAndInsert(id, url);
-	insertSelectElement(editModelData, '.dept-edit-wrap', '/department/get-all-dept-list', 'dept');
+	insertSelectElement(
+		editModelData,
+		'.dept-edit-wrap',
+		'/department/get-all-dept-list',
+		'dept'
+	);
 }
 
 // admin module
 
 function adminDetailsModal(detailsModalBtn, url) {
 	const id = detailsModalBtn.dataset.id;
-	getDetailsModalInfo(url, id, '.details-modal-table', '.details-modal-title', '.details-modal-img');
+	getDetailsModalInfo(
+		url,
+		id,
+		'.details-modal-table',
+		'.details-modal-title',
+		'.details-modal-img'
+	);
 }
 
 async function adminUpdateModal(updateModalBtn, url) {
@@ -41,7 +84,11 @@ async function adminUpdateModal(updateModalBtn, url) {
 async function classUpdateModal(updateModalBtn, url) {
 	const id = updateModalBtn.dataset.id;
 	let editModelData = await getUpdateDetailAndInsert(id, url);
-	await insertCheckBoxElement(editModelData, '.section-checkbox-edit-wrap', '/section/get-all-section-list');
+	await insertCheckBoxElement(
+		editModelData,
+		'.section-checkbox-edit-wrap',
+		'/section/get-all-section-list'
+	);
 }
 
 // Reuse function
@@ -55,7 +102,9 @@ async function insertCheckBoxElement(editModelData, checkboxWrapClass, route) {
 			checkbox.section_name
 		)}
                 name="sections" id="section${index}" value="${checkbox._id}">
-                <label class="form-check-label">${checkbox.section_name}</label></div>`;
+                <label class="form-check-label">${
+					checkbox.section_name
+				}</label></div>`;
 	});
 
 	document.querySelector(checkboxWrapClass).innerHTML = html;
@@ -84,17 +133,26 @@ async function getUpdateDetailAndInsert(id, url) {
 		console.error(e);
 	}
 }
-async function insertSelectElement(editModelData, selectWrapClass, route, selectName) {
+async function insertSelectElement(
+	editModelData,
+	selectWrapClass,
+	route,
+	selectName
+) {
 	// get all dept list and insert to edit with selected
 	const selectWrap = document.querySelector(selectWrapClass);
+	console.log(selectWrap);
+
 	try {
 		let { data: result } = await axios.get(route);
-		// console.log(editModelData);
+		console.log(result);
 		let html = '';
 		result.forEach((el) => {
-			html += `<option value="${el._id}"${findSelected(editModelData, el[selectName + '_name'], selectName)}>${
-				el[selectName + '_name']
-			}</option>`;
+			html += `<option value="${el._id}"${findSelected(
+				editModelData,
+				el[selectName + '_name'],
+				selectName
+			)}>${el[selectName + '_name']}</option>`;
 		});
 		selectWrap.innerHTML = html;
 	} catch (e) {
@@ -117,7 +175,13 @@ async function deleteItemHandler(deleteBtn, url) {
 	}
 }
 
-async function getDetailsModalInfo(url, id, detailsTableClass, detailsModalTitleClass, detailsModalImgClass) {
+async function getDetailsModalInfo(
+	url,
+	id,
+	detailsTableClass,
+	detailsModalTitleClass,
+	detailsModalImgClass
+) {
 	try {
 		// Ajax call
 		let { data: detailsModalData } = await axios.get(`/${url}/${id}`);
@@ -129,8 +193,11 @@ async function getDetailsModalInfo(url, id, detailsTableClass, detailsModalTitle
 
 		// Selector
 		const detailsTable = document.querySelector(detailsTableClass);
-		const detailsModalTitle = document.querySelector(detailsModalTitleClass);
-		document.querySelector(detailsModalImgClass).src = detailsModalData.photo;
+		const detailsModalTitle = document.querySelector(
+			detailsModalTitleClass
+		);
+		document.querySelector(detailsModalImgClass).src =
+			detailsModalData.photo;
 
 		// create data row§
 		let html = `<tbody>`;
@@ -145,12 +212,20 @@ async function getDetailsModalInfo(url, id, detailsTableClass, detailsModalTitle
 				row[1] == null
 			)
 				return;
-			if (row[0] == 'dept' || row[0] == 'section' || row[0] == 'session') {
-				html += `<tr><td>${formatText(row[0])}</td><td>${row[1][row[0] + '_name']}</td></tr>`;
+			if (
+				row[0] == 'dept' ||
+				row[0] == 'section' ||
+				row[0] == 'session'
+			) {
+				html += `<tr><td>${formatText(row[0])}</td><td>${
+					row[1][row[0] + '_name']
+				}</td></tr>`;
 				return;
 			}
 			if (row[0] == '_class') {
-				html += `<tr><td>${formatText(row[0])}</td><td>${row[1].class_name}</td></tr>`;
+				html += `<tr><td>${formatText(row[0])}</td><td>${
+					row[1].class_name
+				}</td></tr>`;
 				return;
 			}
 			if (row[0] == 'full_name' || row[0] == 'student_first_name') {
@@ -174,7 +249,9 @@ function formatText(text) {
 	return text.charAt(0).toUpperCase() + text.slice(1);
 }
 function checked(editModelData, name) {
-	const sectionsArray = editModelData.sections.map((section) => section.section_name);
+	const sectionsArray = editModelData.sections.map(
+		(section) => section.section_name
+	);
 	if (sectionsArray.includes(name)) {
 		return 'checked';
 	} else {
@@ -183,7 +260,8 @@ function checked(editModelData, name) {
 }
 function findSelected(editModelData, value, inputName) {
 	if (inputName == 'class') inputName = '_' + inputName;
-	if (value == editModelData[inputName][inputName + '_name']) return 'selected';
+	if (value == editModelData[inputName][inputName + '_name'])
+		return 'selected';
 	else return '';
 }
 

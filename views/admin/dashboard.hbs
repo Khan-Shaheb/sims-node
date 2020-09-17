@@ -1,144 +1,149 @@
 {{> contentHeader page="Dashboard"}}
 {{> messages}}
+
+{{#if session.isAdmin}}
+
+
+
+    <div class="row">
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+                <div class="inner">
+                    {{#if numberOfStudent}}
+                        <h3>{{ numberOfStudent }}</h3>
+                    {{else}}
+                        <h3>0</h3>
+                    {{/if}}
+                    <p>Students</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <a href="/student" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+                <div class="inner">
+                    {{#if numberOfTeacher}}
+                        <h3>{{ numberOfTeacher }}</h3>
+                    {{else}}
+                        <h3>0</h3>
+                    {{/if}}
+                    <p>Teachers</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <a href="/teacher" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>{{ todaysAttendance }}</h3>
+
+                    <p>Attendances</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-chart-pie"></i>
+                </div>
+                <a href="/attendance" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>{{ numberOfSubject }}</h3>
+
+                    <p>Subjects</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-book"></i>
+                </div>
+                <a href="/subject" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+    </div>
+{{/if}}
 <div class="row">
-	<div class="col-lg-3 col-6">
-		<!-- small box -->
-		<div class="small-box bg-info">
-			<div class="inner">
-				{{#if numberOfStudent}}
-				<h3>{{ numberOfStudent }}</h3>
-				{{else}}
-				<h3>0</h3>
-				{{/if}}
-				<p>Students</p>
-			</div>
-			<div class="icon">
-				<i class="fas fa-graduation-cap"></i>
-			</div>
-			<a href="/student" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-		</div>
-	</div>
-	<!-- ./col -->
-	<div class="col-lg-3 col-6">
-		<!-- small box -->
-		<div class="small-box bg-success">
-			<div class="inner">
-				{{#if numberOfTeacher}}
-				<h3>{{ numberOfTeacher }}</h3>
-				{{else}}
-				<h3>0</h3>
-				{{/if}}
-				<p>Teachers</p>
-			</div>
-			<div class="icon">
-				<i class="fas fa-user"></i>
-			</div>
-			<a href="/teacher" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-		</div>
-	</div>
-	<!-- ./col -->
-	<div class="col-lg-3 col-6">
-		<!-- small box -->
-		<div class="small-box bg-warning">
-			<div class="inner">
-				<h3>{{ todaysAttendance }}</h3>
+    <div class="col-md-3">
+        <div class="sticky-top mb-3">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Draggable Events</h4>
+                </div>
+                <div class="card-body">
+                    <!-- the events -->
+                    <div id="external-events">
+                        <div class="checkbox">
+                            <label for="drop-remove">
+                                <input type="checkbox" id="drop-remove" />
+                                remove after drop
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Create Event</h3>
+                </div>
+                <div class="card-body">
+                    <div class="btn-group" style="width: 100%; margin-bottom: 10px">
+                        <!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>-->
+                        <ul class="fc-color-picker" id="color-chooser">
+                            <li>
+                                <a class="text-primary" href="#"><i class="fas fa-square"></i></a>
+                            </li>
+                            <li>
+                                <a class="text-warning" href="#"><i class="fas fa-square"></i></a>
+                            </li>
+                            <li>
+                                <a class="text-success" href="#"><i class="fas fa-square"></i></a>
+                            </li>
+                            <li>
+                                <a class="text-danger" href="#"><i class="fas fa-square"></i></a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="#"><i class="fas fa-square"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /btn-group -->
+                    <div class="input-group">
+                        <input id="new-event" type="text" class="form-control" placeholder="Event Title" />
 
-				<p>Attendances</p>
-			</div>
-			<div class="icon">
-				<i class="fa fa-chart-pie"></i>
-			</div>
-			<a href="/attendance" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-		</div>
-	</div>
-	<!-- ./col -->
-	<div class="col-lg-3 col-6">
-		<!-- small box -->
-		<div class="small-box bg-danger">
-			<div class="inner">
-				<h3>{{ numberOfSubject }}</h3>
-
-				<p>Subjects</p>
-			</div>
-			<div class="icon">
-				<i class="fa fa-book"></i>
-			</div>
-			<a href="/subject" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-		</div>
-	</div>
-	<!-- ./col -->
-</div>
-
-<div class="row">
-	<div class="col-md-3">
-		<div class="sticky-top mb-3">
-			<div class="card">
-				<div class="card-header">
-					<h4 class="card-title">Draggable Events</h4>
-				</div>
-				<div class="card-body">
-					<!-- the events -->
-					<div id="external-events">
-						<div class="checkbox">
-							<label for="drop-remove">
-								<input type="checkbox" id="drop-remove" />
-								remove after drop
-							</label>
-						</div>
-					</div>
-				</div>
-				<!-- /.card-body -->
-			</div>
-			<!-- /.card -->
-			<div class="card">
-				<div class="card-header">
-					<h3 class="card-title">Create Event</h3>
-				</div>
-				<div class="card-body">
-					<div class="btn-group" style="width: 100%; margin-bottom: 10px">
-						<!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>-->
-						<ul class="fc-color-picker" id="color-chooser">
-							<li>
-								<a class="text-primary" href="#"><i class="fas fa-square"></i></a>
-							</li>
-							<li>
-								<a class="text-warning" href="#"><i class="fas fa-square"></i></a>
-							</li>
-							<li>
-								<a class="text-success" href="#"><i class="fas fa-square"></i></a>
-							</li>
-							<li>
-								<a class="text-danger" href="#"><i class="fas fa-square"></i></a>
-							</li>
-							<li>
-								<a class="text-muted" href="#"><i class="fas fa-square"></i></a>
-							</li>
-						</ul>
-					</div>
-					<!-- /btn-group -->
-					<div class="input-group">
-						<input id="new-event" type="text" class="form-control" placeholder="Event Title" />
-
-						<div class="input-group-append">
-							<button id="add-new-event" type="button" class="btn btn-primary">Add</button>
-						</div>
-						<!-- /btn-group -->
-					</div>
-					<!-- /input-group -->
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /.col -->
-	<div class="col-md-9">
-		<div class="card card-primary">
-			<div class="card-body p-0">
-				<!-- THE CALENDAR -->
-				<div id="calendar"></div>
-			</div>
-			<!-- /.card-body -->
-		</div>
-		<!-- /.card -->
-	</div>
-	<!-- /.col -->
+                        <div class="input-group-append">
+                            <button id="add-new-event" type="button" class="btn btn-primary">Add</button>
+                        </div>
+                        <!-- /btn-group -->
+                    </div>
+                    <!-- /input-group -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+    <div class="col-md-9">
+        <div class="card card-primary">
+            <div class="card-body p-0">
+                <!-- THE CALENDAR -->
+                <div id="calendar"></div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.col -->
 </div>
