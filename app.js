@@ -54,7 +54,6 @@ app.engine(
 // ALl Router
 const dashboardRouter = require('./routes/admin/dashboardRouter');
 const admin = require('./routes/admin/adminRouter');
-const classRoom = require('./routes/admin/classRoomRouter');
 const classRouter = require('./routes/admin/classRouter');
 const subject = require('./routes/admin/subjectRouter');
 const teacher = require('./routes/admin/teacherRouter');
@@ -70,7 +69,6 @@ const login = require('./routes/loginRouter');
 
 app.use('/', dashboardRouter);
 app.use('/admin', admin);
-app.use('/classroom', classRoom);
 app.use('/class', classRouter);
 app.use('/subject', subject);
 app.use('/teacher', teacher);
